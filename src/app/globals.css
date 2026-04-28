@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #0f1f3c;
+
+  --font-sans: var(--font-sans);
+
+  --color-brand-yellow: #f5c800;
+  --color-brand-yellow-hover: #e0b800;
+  --color-brand-navy: #0f1f3c;
+  --color-brand-navy-hover: #1a2f52;
+  --color-brand-navy-soft: #1d2f55;
+
+  --color-state-success: #10b981;
+  --color-state-danger: #ef4444;
+  --color-state-info: #3b82f6;
+
+  --radius-pill: 9999px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+}
