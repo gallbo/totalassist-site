@@ -109,7 +109,7 @@ export function Contacto() {
 
           <button
             type="submit"
-            className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy mt-6 w-full rounded-pill px-6 py-3 text-sm font-semibold transition-colors"
+            className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy mt-6 w-full rounded-pill px-6 py-3.5 text-sm font-semibold transition-colors"
           >
             Enviar mensaje
           </button>

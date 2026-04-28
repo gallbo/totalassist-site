@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { siteConfig, beneficiosHero } from "@/lib/site-config";
@@ -6,13 +7,30 @@ export function Hero() {
   return (
     <section className="bg-brand-navy relative overflow-hidden text-white">
       <BackgroundPattern variant="hero" invert />
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:px-8 lg:py-28">
+      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-12 lg:px-8 lg:py-28">
         <div className="lg:col-span-7">
-          <span className="bg-brand-yellow text-brand-navy inline-flex items-center rounded-pill px-3 py-1 text-xs font-semibold uppercase tracking-wide">
+          <div className="flex flex-col items-center gap-3 lg:hidden">
+            <Image
+              src="/brand/totalassist-shield.png"
+              alt="Total Assist"
+              width={128}
+              height={144}
+              priority
+              className="h-16 w-auto"
+            />
+            <p className="text-center text-2xl font-bold tracking-tight text-white">
+              TOTAL <span className="text-brand-yellow">ASSIST</span>
+            </p>
+            <p className="-mt-2 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400">
+              Insurance Claim by Skipper
+            </p>
+          </div>
+
+          <span className="bg-brand-yellow text-brand-navy mt-8 inline-flex items-center rounded-pill px-3 py-1 text-xs font-semibold uppercase tracking-wide lg:mt-0">
             Servicio gratuito hasta {siteConfig.freeUntil}
           </span>
 
-          <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 text-3xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
             Respaldo profesional para
             <span className="text-brand-yellow"> tus reclamaciones de seguros</span>
           </h1>
@@ -39,13 +57,13 @@ export function Hero() {
               href={siteConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy rounded-pill px-6 py-3 text-center text-sm font-semibold transition-colors"
+              className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy w-full rounded-pill px-6 py-3.5 text-center text-sm font-semibold transition-colors sm:w-auto"
             >
               Regístrate gratis
             </a>
             <a
               href="#servicio"
-              className="rounded-pill border border-white/30 px-6 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="w-full rounded-pill border border-white/30 px-6 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
             >
               Conoce el servicio
             </a>

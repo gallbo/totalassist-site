@@ -53,7 +53,7 @@ export function Header() {
           type="button"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           onClick={() => setOpen((v) => !v)}
-          className="text-brand-navy inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-200 lg:hidden"
+          className="text-brand-navy inline-flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 lg:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -71,7 +71,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-brand-navy hover:bg-neutral-50 rounded-md px-3 py-2.5 text-sm font-medium"
+              className="text-brand-navy hover:bg-neutral-50 rounded-md px-3 py-3 text-sm font-medium"
             >
               {link.label}
             </Link>
@@ -81,7 +81,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="bg-brand-yellow text-brand-navy mt-2 rounded-pill px-4 py-2.5 text-center text-sm font-semibold"
+            className="bg-brand-yellow text-brand-navy mt-2 rounded-pill px-4 py-3 text-center text-sm font-semibold"
           >
             Solicita asesoría
           </a>

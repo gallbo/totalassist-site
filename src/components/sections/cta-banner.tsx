@@ -16,7 +16,7 @@ export function CtaBanner() {
           href={siteConfig.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-brand-navy hover:bg-brand-navy-hover shrink-0 rounded-pill px-6 py-3 text-sm font-semibold text-white transition-colors"
+          className="bg-brand-navy hover:bg-brand-navy-hover w-full shrink-0 rounded-pill px-6 py-3.5 text-center text-sm font-semibold text-white transition-colors sm:w-auto"
         >
           Regístrate ahora
         </a>
