@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { BrandIntro } from "@/components/sections/brand-intro";
-import { Hero } from "@/components/sections/hero";
+import { OpeningHero } from "@/components/sections/opening-hero";
+import { Highlights } from "@/components/sections/highlights";
 import { ExtensionProfesional } from "@/components/sections/extension-profesional";
 import { Problema } from "@/components/sections/problema";
 import { Riesgos } from "@/components/sections/riesgos";
@@ -17,8 +17,8 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <BrandIntro />
-        <Hero />
+        <OpeningHero />
+        <Highlights />
         <ExtensionProfesional />
         <Problema />
         <Riesgos />

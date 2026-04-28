@@ -1,4 +1,5 @@
 import { Award, Building2, ShieldCheck } from "lucide-react";
+import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { siteConfig } from "@/lib/site-config";
 
 const credenciales = [
@@ -25,7 +26,8 @@ export function Beneficios() {
       id="beneficios"
       className="bg-brand-navy relative overflow-hidden py-20 text-white lg:py-28"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <BackgroundPattern variant="hero" invert />
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-brand-yellow text-xs font-semibold uppercase tracking-widest">
             Por qué Total Assist

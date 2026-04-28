@@ -1,10 +1,12 @@
 import { Clock } from "lucide-react";
+import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { consumoTiempo } from "@/lib/site-config";
 
 export function Problema() {
   return (
-    <section className="bg-neutral-50 py-20 lg:py-28">
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
+    <section className="relative overflow-hidden bg-neutral-50 py-20 lg:py-28">
+      <BackgroundPattern variant="subtle" />
+      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
         <div>
           <p className="text-brand-yellow text-xs font-semibold uppercase tracking-widest">
             El problema
