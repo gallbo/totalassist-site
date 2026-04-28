@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Check } from "lucide-react";
 import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { siteConfig, beneficiosHero } from "@/lib/site-config";
@@ -7,26 +6,9 @@ export function Hero() {
   return (
     <section className="bg-brand-navy relative overflow-hidden text-white">
       <BackgroundPattern variant="hero" invert />
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-12 lg:px-8 lg:py-28">
+      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-12 lg:px-8 lg:py-28">
         <div className="lg:col-span-7">
-          <div className="flex flex-col items-center gap-3 lg:hidden">
-            <Image
-              src="/brand/totalassist-shield.png"
-              alt="Total Assist"
-              width={128}
-              height={144}
-              priority
-              className="h-16 w-auto"
-            />
-            <p className="text-center text-2xl font-bold tracking-tight text-white">
-              TOTAL <span className="text-brand-yellow">ASSIST</span>
-            </p>
-            <p className="-mt-2 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400">
-              Insurance Claim by Skipper
-            </p>
-          </div>
-
-          <span className="bg-brand-yellow text-brand-navy mt-8 inline-flex items-center rounded-pill px-3 py-1 text-xs font-semibold uppercase tracking-wide lg:mt-0">
+          <span className="bg-brand-yellow text-brand-navy inline-flex items-center rounded-pill px-3 py-1 text-xs font-semibold uppercase tracking-wide">
             Servicio gratuito hasta {siteConfig.freeUntil}
           </span>
 

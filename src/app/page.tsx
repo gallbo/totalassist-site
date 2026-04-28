@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { BrandIntro } from "@/components/sections/brand-intro";
 import { Hero } from "@/components/sections/hero";
 import { ExtensionProfesional } from "@/components/sections/extension-profesional";
 import { Problema } from "@/components/sections/problema";
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <Header />
       <main>
+        <BrandIntro />
         <Hero />
         <ExtensionProfesional />
         <Problema />
