@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -10,9 +11,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Total Assist — Respaldo profesional para agentes de seguros",
+  title: {
+    default: "Total Assist — Aliado estratégico en gestión de siniestros",
+    template: "%s | Total Assist",
+  },
   description:
-    "Equipo especializado en gestión de reclamaciones de seguros. Liberamos tu tiempo, integramos expedientes y damos seguimiento a tus siniestros.",
+    "Total Assist gestiona las reclamaciones de seguro de tus clientes en tu nombre. Más de 27 años respaldando a agentes de seguros en México.",
 };
 
 export default function RootLayout({
@@ -25,7 +29,10 @@ export default function RootLayout({
       lang="es"
       className={cn("h-full antialiased", inter.variable, "font-sans")}
     >
-      <body className="flex min-h-full flex-col bg-white">{children}</body>
+      <body className="flex min-h-full flex-col bg-white">
+        {children}
+        <Toaster position="top-right" richColors closeButton />
+      </body>
     </html>
   );
 }
