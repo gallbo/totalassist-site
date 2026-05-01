@@ -1,20 +1,24 @@
-"use client";
-
-import { useState } from "react";
-import { Phone, MessageCircle, Mail } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Mail, MessageCircle, Phone } from "lucide-react";
 import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { siteConfig } from "@/lib/site-config";
 
-export function Contacto() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+type Variant = "corp" | "landing";
 
-  const mailtoHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-    `Contacto desde la web — ${name || "Agente"}`,
-  )}&body=${encodeURIComponent(
-    `Nombre: ${name}\nCorreo: ${email}\n\n${message}`,
-  )}`;
+type Props = {
+  variant?: Variant;
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+};
+
+export function Contacto({
+  variant = "corp",
+  eyebrow,
+  title,
+  body,
+}: Props = {}) {
+  const copy = resolveCopy(variant, { eyebrow, title, body });
 
   return (
     <section
@@ -22,110 +26,119 @@ export function Contacto() {
       className="bg-brand-navy relative overflow-hidden py-20 text-white lg:py-28"
     >
       <BackgroundPattern variant="corner" invert />
-      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <div>
+      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8">
+        <div className="lg:col-span-6">
           <p className="text-brand-yellow text-xs font-semibold uppercase tracking-widest">
-            Hablemos
+            {copy.eyebrow}
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Suma a Total Assist a tu operación — gratis hasta {siteConfig.freeUntil}
+            {copy.title}
           </h2>
           <p className="mt-5 text-base leading-relaxed text-neutral-300">
-            Cuéntanos sobre ti y te explicamos cómo activamos el respaldo en tu cartera.
+            {copy.body}
           </p>
 
-          <div className="mt-10 space-y-4">
-            <ContactRow
-              icon={MessageCircle}
-              title="WhatsApp"
-              value={siteConfig.phone}
-              href={siteConfig.whatsappUrl}
-              external
-            />
-            <ContactRow
-              icon={Phone}
-              title="Teléfono"
-              value={siteConfig.phone}
-              href={`tel:+${siteConfig.phoneRaw}`}
-            />
-            <ContactRow
-              icon={Mail}
-              title="Correo"
-              value={siteConfig.email}
-              href={`mailto:${siteConfig.email}`}
-            />
-            <p className="pt-2 text-sm text-neutral-400">{siteConfig.hours}</p>
-          </div>
+          {variant === "landing" ? (
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/registro"
+                className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy inline-flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 text-sm font-semibold transition-colors"
+              >
+                Regístrate gratis
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href={`${siteConfig.appUrl}/login`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-pill border border-white/30 px-7 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                Ya tengo cuenta
+              </a>
+            </div>
+          ) : (
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={siteConfig.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy inline-flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 text-sm font-semibold transition-colors"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Escríbenos por WhatsApp
+              </a>
+              <a
+                href={`tel:+${siteConfig.phoneRaw}`}
+                className="rounded-pill border border-white/30 px-7 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                Llamar ahora
+              </a>
+            </div>
+          )}
         </div>
 
-        <form
-          className="rounded-3xl bg-white p-7 shadow-2xl sm:p-9"
-          onSubmit={(e) => {
-            e.preventDefault();
-            window.location.href = mailtoHref;
-          }}
-        >
-          <h3 className="text-brand-navy text-xl font-semibold">Envíanos un mensaje</h3>
-          <p className="mt-1 text-sm text-neutral-500">
-            Te respondemos el mismo día hábil.
-          </p>
+        <div className="lg:col-span-6">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur sm:p-9">
+            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-300">
+              {variant === "landing" ? "También puedes contactarnos" : "Otras formas de contacto"}
+            </p>
 
-          <div className="mt-6 space-y-4">
-            <Field
-              label="Nombre"
-              id="name"
-              value={name}
-              onChange={setName}
-              placeholder="Tu nombre"
-              required
-            />
-            <Field
-              label="Correo"
-              id="email"
-              type="email"
-              value={email}
-              onChange={setEmail}
-              placeholder="tu@correo.com"
-              required
-            />
-            <div>
-              <label
-                htmlFor="message"
-                className="text-brand-navy mb-1.5 block text-sm font-medium"
-              >
-                Mensaje
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Cuéntanos brevemente sobre tu operación"
-                className="focus:border-brand-navy focus:ring-brand-navy/20 w-full resize-none rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 outline-none transition-colors focus:bg-white focus:ring-2"
-                required
+            <div className="mt-6 space-y-4">
+              <ContactRow
+                icon={MessageCircle}
+                title="WhatsApp"
+                value={siteConfig.phone}
+                href={siteConfig.whatsappUrl}
+                external
+                primary={variant === "corp"}
+              />
+              <ContactRow
+                icon={Phone}
+                title="Teléfono"
+                value={siteConfig.phone}
+                href={`tel:+${siteConfig.phoneRaw}`}
+              />
+              <ContactRow
+                icon={Mail}
+                title="Correo"
+                value={siteConfig.email}
+                href={`mailto:${siteConfig.email}`}
               />
             </div>
+
+            <p className="mt-8 border-t border-white/10 pt-5 text-sm text-neutral-400">
+              {siteConfig.hours}
+            </p>
           </div>
-
-          <button
-            type="submit"
-            className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy mt-6 w-full rounded-pill px-6 py-3.5 text-sm font-semibold transition-colors"
-          >
-            Enviar mensaje
-          </button>
-
-          <a
-            href={siteConfig.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-navy hover:text-brand-yellow-hover mt-3 block text-center text-sm font-medium transition-colors"
-          >
-            o escríbenos por WhatsApp →
-          </a>
-        </form>
+        </div>
       </div>
     </section>
   );
+}
+
+function resolveCopy(
+  variant: Variant,
+  override: { eyebrow?: string; title?: string; body?: string },
+) {
+  const defaults: Record<Variant, { eyebrow: string; title: string; body: string }> = {
+    corp: {
+      eyebrow: "Hablemos",
+      title: "¿Listo para sumar respaldo profesional a tu operación?",
+      body: "Cuéntanos sobre tu cartera por WhatsApp y te explicamos cómo Total Assist se integra a tu día a día.",
+    },
+    landing: {
+      eyebrow: "Empieza ya",
+      title: `Activa tu cuenta gratis hasta ${siteConfig.freeUntil}`,
+      body: "Crea tu cuenta en minutos y empezamos a respaldar tus reclamaciones desde el primer día. Sin compromisos.",
+    },
+  };
+
+  const base = defaults[variant];
+  return {
+    eyebrow: override.eyebrow ?? base.eyebrow,
+    title: override.title ?? base.title,
+    body: override.body ?? base.body,
+  };
 }
 
 function ContactRow({
@@ -134,12 +147,14 @@ function ContactRow({
   value,
   href,
   external,
+  primary,
 }: {
   icon: typeof Phone;
   title: string;
   value: string;
   href: string;
   external?: boolean;
+  primary?: boolean;
 }) {
   return (
     <a
@@ -148,7 +163,13 @@ function ContactRow({
       rel={external ? "noopener noreferrer" : undefined}
       className="group flex items-center gap-4"
     >
-      <span className="bg-brand-yellow text-brand-navy inline-flex h-11 w-11 items-center justify-center rounded-full">
+      <span
+        className={
+          primary
+            ? "bg-brand-yellow text-brand-navy inline-flex h-12 w-12 items-center justify-center rounded-full"
+            : "inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white"
+        }
+      >
         <Icon className="h-5 w-5" />
       </span>
       <span>
@@ -160,43 +181,5 @@ function ContactRow({
         </span>
       </span>
     </a>
-  );
-}
-
-function Field({
-  label,
-  id,
-  value,
-  onChange,
-  type = "text",
-  placeholder,
-  required,
-}: {
-  label: string;
-  id: string;
-  value: string;
-  onChange: (v: string) => void;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-}) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="text-brand-navy mb-1.5 block text-sm font-medium"
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        required={required}
-        className="focus:border-brand-navy focus:ring-brand-navy/20 w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 outline-none transition-colors focus:bg-white focus:ring-2"
-      />
-    </div>
   );
 }

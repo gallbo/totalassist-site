@@ -2,10 +2,22 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { faqs } from "@/lib/site-config";
+import { faqs as defaultFaqs } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-export function Faq() {
+type Item = { q: string; a: string };
+
+type Props = {
+  eyebrow?: string;
+  title?: string;
+  items?: Item[];
+};
+
+export function Faq({
+  eyebrow = "Preguntas frecuentes",
+  title = "Lo que más nos preguntan los agentes",
+  items = defaultFaqs,
+}: Props = {}) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -13,15 +25,15 @@ export function Faq() {
       <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-brand-yellow text-xs font-semibold uppercase tracking-widest">
-            Preguntas frecuentes
+            {eyebrow}
           </p>
           <h2 className="text-brand-navy mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Lo que más nos preguntan los agentes
+            {title}
           </h2>
         </div>
 
         <div className="mt-12 divide-y divide-neutral-200 border-y border-neutral-200">
-          {faqs.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = open === i;
             return (
               <div key={item.q}>

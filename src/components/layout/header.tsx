@@ -7,17 +7,54 @@ import { Logo } from "@/components/layout/logo";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { label: "Servicio", href: "#servicio" },
-  { label: "Beneficios", href: "#beneficios" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Preguntas", href: "#faq" },
-  { label: "Contacto", href: "#contacto" },
-];
+type Variant = "corp" | "landing";
 
-export function Header() {
+const NAV_LINKS: Record<Variant, { label: string; href: string }[]> = {
+  corp: [
+    { label: "Servicios", href: "#servicios" },
+    { label: "Nosotros", href: "#nosotros" },
+    { label: "Proceso", href: "#proceso" },
+    { label: "Preguntas", href: "#faq" },
+    { label: "Contacto", href: "#contacto" },
+  ],
+  landing: [
+    { label: "Servicio", href: "#servicio" },
+    { label: "Beneficios", href: "#beneficios" },
+    { label: "Proceso", href: "#proceso" },
+    { label: "Preguntas", href: "#faq" },
+    { label: "Contacto", href: "#contacto" },
+  ],
+};
+
+const CTA: Record<Variant, { label: string; href: string; external: boolean }> = {
+  corp: {
+    label: "Solicita asesoría",
+    href: siteConfig.whatsappUrl,
+    external: true,
+  },
+  landing: {
+    label: "Regístrate gratis",
+    href: "/registro",
+    external: false,
+  },
+};
+
+const CROSS_LINK: Record<Variant, { label: string; href: string; external: boolean }> = {
+  corp: { label: "Para agentes", href: "/inicio", external: false },
+  landing: {
+    label: "Iniciar sesión",
+    href: `${siteConfig.appUrl}/login`,
+    external: true,
+  },
+};
+
+export function Header({ variant = "corp" }: { variant?: Variant }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const navLinks = NAV_LINKS[variant];
+  const cta = CTA[variant];
+  const cross = CROSS_LINK[variant];
 
   useEffect(() => {
     const onScroll = () => {
@@ -72,14 +109,37 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-4 lg:flex">
+          {cross.external ? (
+            <a
+              href={cross.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "hover:text-brand-yellow text-sm font-medium transition-colors",
+                scrolled ? "text-neutral-500" : "text-white/80",
+              )}
+            >
+              {cross.label}
+            </a>
+          ) : (
+            <Link
+              href={cross.href}
+              className={cn(
+                "hover:text-brand-yellow text-sm font-medium transition-colors",
+                scrolled ? "text-neutral-500" : "text-white/80",
+              )}
+            >
+              {cross.label}
+            </Link>
+          )}
           <a
-            href={siteConfig.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={cta.href}
+            target={cta.external ? "_blank" : undefined}
+            rel={cta.external ? "noopener noreferrer" : undefined}
             className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy rounded-pill px-5 py-2.5 text-sm font-semibold transition-colors"
           >
-            Solicita asesoría
+            {cta.label}
           </a>
         </div>
 
@@ -121,14 +181,43 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          {cross.external ? (
+            <a
+              href={cross.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "rounded-md px-3 py-3 text-sm font-medium",
+                scrolled
+                  ? "text-neutral-500 hover:bg-neutral-50"
+                  : "text-white/80 hover:bg-white/5",
+              )}
+            >
+              {cross.label}
+            </a>
+          ) : (
+            <Link
+              href={cross.href}
+              onClick={() => setOpen(false)}
+              className={cn(
+                "rounded-md px-3 py-3 text-sm font-medium",
+                scrolled
+                  ? "text-neutral-500 hover:bg-neutral-50"
+                  : "text-white/80 hover:bg-white/5",
+              )}
+            >
+              {cross.label}
+            </Link>
+          )}
           <a
-            href={siteConfig.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={cta.href}
+            target={cta.external ? "_blank" : undefined}
+            rel={cta.external ? "noopener noreferrer" : undefined}
             onClick={() => setOpen(false)}
             className="bg-brand-yellow text-brand-navy mt-2 rounded-pill px-4 py-3 text-center text-sm font-semibold"
           >
-            Solicita asesoría
+            {cta.label}
           </a>
         </nav>
       </div>
