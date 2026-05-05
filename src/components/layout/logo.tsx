@@ -3,11 +3,17 @@ import { cn } from "@/lib/utils";
 
 type LogoProps = {
   variant?: "full" | "compact" | "shield";
+  tone?: "default" | "inverted";
   className?: string;
   priority?: boolean;
 };
 
-export function Logo({ variant = "full", className, priority }: LogoProps) {
+export function Logo({
+  variant = "full",
+  tone = "default",
+  className,
+  priority,
+}: LogoProps) {
   if (variant === "shield") {
     return (
       <Image
@@ -30,21 +36,34 @@ export function Logo({ variant = "full", className, priority }: LogoProps) {
           width={64}
           height={72}
           priority={priority}
-          className="h-8 w-auto"
+          className={cn(
+            "h-8 w-auto",
+            tone === "inverted" && "brightness-0 invert",
+          )}
         />
-        <span className="text-brand-navy text-sm font-bold tracking-tight">
+        <span
+          className={cn(
+            "text-sm font-bold tracking-tight",
+            tone === "inverted" ? "text-white" : "text-brand-navy",
+          )}
+        >
           TOTAL ASSIST
         </span>
       </div>
     );
   }
 
+  const fullSrc =
+    tone === "inverted"
+      ? "/brand/totalassist-full-white-v3.png"
+      : "/brand/totalassist-full-v3.png";
+
   return (
     <Image
-      src="/brand/totalassist-full.png"
-      alt="Total Assist — Insurance Claim"
-      width={444}
-      height={202}
+      src={fullSrc}
+      alt="Total Assist — Insurance Claim by Skipper"
+      width={914}
+      height={219}
       priority={priority}
       className={cn("h-14 w-auto", className)}
     />

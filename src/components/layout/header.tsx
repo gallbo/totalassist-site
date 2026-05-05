@@ -80,18 +80,19 @@ export function Header({ variant = "corp" }: { variant?: Variant }) {
       )}
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          aria-label="Total Assist — Inicio"
-          className={cn(
-            "transition-[filter] duration-300",
-            scrolled
-              ? ""
-              : "[&_img]:brightness-0 [&_img]:invert [&_span]:!text-white",
-          )}
-        >
-          <Logo variant="compact" className="lg:hidden" priority />
-          <Logo variant="full" className="hidden lg:flex" priority />
+        <Link href="/" aria-label="Total Assist — Inicio">
+          <Logo
+            variant="compact"
+            tone={scrolled ? "default" : "inverted"}
+            className="lg:hidden"
+            priority
+          />
+          <Logo
+            variant="full"
+            tone={scrolled ? "default" : "inverted"}
+            className="hidden lg:flex"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
