@@ -8,7 +8,7 @@ export const siteConfig = {
   email: "contacto@totalassist.com.mx",
   yearsExperience: 27,
   freeUntil: "diciembre 2026",
-  appUrl: "https://app.totalassist.com",
+  appUrl: process.env.NEXT_PUBLIC_TOTALASSIST_APP_URL || "https://totalclaimassist.app",
 };
 
 export const beneficiosHero = [
