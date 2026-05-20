@@ -14,15 +14,30 @@ import { Faq } from "@/components/sections/faq";
 import { Contacto } from "@/components/sections/contacto";
 import { homeFaqs, homeTagline, siteConfig } from "@/lib/site-config";
 
+// La home corp usa los defaults del layout root (mismo title/description/og/twitter).
+// El layout ya tiene canonical "/" + og:image, así que solo declaramos alternates
+// explícitamente y no tocamos openGraph/twitter (Next.js sobreescribiría enteros).
 export const metadata: Metadata = {
-  title: "Total Assist — Aliado estratégico en gestión de siniestros",
-  description:
-    "Total Assist gestiona las reclamaciones de seguro de tus clientes en tu nombre. Más de 27 años respaldando a agentes de seguros en México.",
+  alternates: { canonical: "/" },
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeFaqs.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Header variant="corp" />
       <main>
         <HomeHero />

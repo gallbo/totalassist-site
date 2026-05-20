@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /inicio
+Disallow: /registro
+Disallow: /_next/
+Disallow: /api/
+
+Sitemap: https://totalassist.com/sitemap.xml

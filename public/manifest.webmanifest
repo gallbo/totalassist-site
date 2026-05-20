@@ -1,0 +1,15 @@
+{
+  "name": "Total Assist",
+  "short_name": "Total Assist",
+  "description": "Aliado estratégico en gestión de siniestros. Respaldo profesional para agentes de seguros.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1F3C",
+  "theme_color": "#0F1F3C",
+  "lang": "es-MX",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/apple-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}
