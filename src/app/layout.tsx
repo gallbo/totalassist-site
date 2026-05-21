@@ -11,7 +11,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://totalassist.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://totalclaimassist.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   generator: siteConfig.name,
   keywords: [
     "Total Assist",
+    "Total Claim Assist",
+    "claim assist",
+    "claim assist seguros",
     "gestión de siniestros",
     "reclamaciones de seguros",
     "agentes de seguros México",
@@ -95,6 +98,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: siteConfig.name,
+  alternateName: "Total Claim Assist",
   url: SITE_URL,
   logo: `${SITE_URL}/brand/totalassist-full-v3.png`,
   description:
@@ -118,6 +122,7 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: siteConfig.name,
+  alternateName: "Total Claim Assist",
   url: SITE_URL,
   inLanguage: "es-MX",
 };

@@ -5,4 +5,4 @@ Disallow: /registro
 Disallow: /_next/
 Disallow: /api/
 
-Sitemap: https://totalassist.com/sitemap.xml
+Sitemap: https://totalclaimassist.com/sitemap.xml
