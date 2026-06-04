@@ -1,10 +1,11 @@
-import { ArrowRight, Briefcase, GraduationCap, Lightbulb } from "lucide-react";
+import { ArrowRight, Briefcase, GraduationCap, Lightbulb, Scale } from "lucide-react";
 import { homeServicios, siteConfig } from "@/lib/site-config";
 
 const ICONS = {
   gestion: Briefcase,
   consultoria: Lightbulb,
   conferencias: GraduationCap,
+  "defensa-legal": Scale,
 } as const;
 
 export function HomeServicios() {
@@ -16,15 +17,15 @@ export function HomeServicios() {
             Nuestros servicios
           </p>
           <h2 className="text-brand-navy mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Tres formas de respaldarte como agente
+            Cuatro formas de respaldarte como agente
           </h2>
           <p className="mt-5 text-base leading-relaxed text-neutral-600">
-            Te acompañamos en lo operativo, lo técnico y la formación profesional. Tú
-            decides hasta dónde sumar Total Assist a tu negocio.
+            Te acompañamos en lo operativo, lo técnico, la formación profesional y la
+            defensa legal. Tú decides hasta dónde sumar Total Assist a tu negocio.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {homeServicios.map((s) => {
             const Icon = ICONS[s.id as keyof typeof ICONS];
             return (

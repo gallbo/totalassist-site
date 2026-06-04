@@ -5,7 +5,7 @@ export const siteConfig = {
   phoneRaw: "525561455557",
   whatsappUrl: "https://wa.me/525561455557",
   hours: "Lunes a Viernes, 08:00 a 18:00",
-  email: "contacto@totalassist.com.mx",
+  email: "contacto@totalclaimassist.com",
   yearsExperience: 27,
   freeUntil: "diciembre 2026",
   appUrl: process.env.NEXT_PUBLIC_TOTALASSIST_APP_URL || "https://totalclaimassist.app",
@@ -211,6 +211,16 @@ export const homeServicios = [
       "Programas a medida",
       "Innovación y tendencias del sector",
       "Mejores prácticas para equipos",
+    ],
+  },
+  {
+    id: "defensa-legal",
+    title: "Defensa legal del agente de seguros",
+    body: "Respaldo legal especializado para que ejerzas tu actividad como agente de seguros con mayor seguridad y confianza, protegiendo tu labor profesional ante riesgos legales, administrativos y regulatorios.",
+    bullets: [
+      "Responsabilidad civil frente al asegurado",
+      "Responsabilidad por faltas administrativas ante la CNSF",
+      "Consultoría jurídica general bajo la figura de coordinador",
     ],
   },
 ];

@@ -4,7 +4,7 @@ import { homeHero, homeImages, siteConfig } from "@/lib/site-config";
 
 export function HomeHero() {
   return (
-    <section className="bg-brand-navy relative flex h-svh items-center overflow-hidden text-white">
+    <section className="bg-brand-navy relative flex min-h-svh items-center text-white">
       <BackgroundPattern variant="auth" invert />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 pt-16 pb-6 sm:px-6 sm:pt-20 sm:pb-8 lg:px-8 lg:pt-24 lg:pb-12">
