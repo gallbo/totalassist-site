@@ -11,6 +11,8 @@ import { Logo } from "@/components/layout/logo";
 import { ApiError, registrarBroker } from "@/lib/api/brokers";
 import { registerSchema, type RegisterInput } from "@/lib/schemas/auth";
 import { siteConfig } from "@/lib/site-config";
+import { TERMINOS_VERSION } from "@/lib/terminos";
+import { TerminosModal } from "@/components/terminos-modal";
 import { cn } from "@/lib/utils";
 
 const ERROR_FIELD_MAP: Record<string, keyof RegisterInput> = {
@@ -45,6 +47,7 @@ export default function RegistroPage() {
       cedula: "",
       password: "",
       password_confirmation: "",
+      acepta_terminos: false,
     },
   });
 
@@ -59,6 +62,8 @@ export default function RegistroPage() {
         telefono: values.telefono,
         cedula: values.cedula,
         password: values.password,
+        acepta_terminos: values.acepta_terminos,
+        terminos_version: TERMINOS_VERSION,
       });
 
       setSuccess(true);
@@ -270,6 +275,28 @@ export default function RegistroPage() {
                       </Field>
                     </div>
 
+                    <div className="flex flex-col gap-1.5">
+                      <div className="flex items-start gap-3 text-sm text-neutral-600">
+                        <input
+                          id="acepta_terminos"
+                          type="checkbox"
+                          disabled={submitting}
+                          className="text-brand-navy focus:ring-brand-navy/20 mt-0.5 h-5 w-5 shrink-0 rounded border-neutral-300"
+                          {...register("acepta_terminos")}
+                        />
+                        <label htmlFor="acepta_terminos">
+                          He leído y acepto los{" "}
+                          <TerminosModal triggerClassName="text-brand-navy font-medium underline" />{" "}
+                          y el aviso de privacidad.
+                        </label>
+                      </div>
+                      {errors.acepta_terminos && (
+                        <p className="text-state-danger text-xs font-medium">
+                          {errors.acepta_terminos.message}
+                        </p>
+                      )}
+                    </div>
+
                     <div className="mt-4 flex justify-center">
                       <button
                         type="submit"
@@ -289,18 +316,6 @@ export default function RegistroPage() {
                         )}
                       </button>
                     </div>
-
-                    <p className="text-xs text-neutral-500">
-                      Al crear tu cuenta aceptas nuestros{" "}
-                      <Link href="/" className="hover:text-brand-navy underline">
-                        términos
-                      </Link>{" "}
-                      y el{" "}
-                      <Link href="/" className="hover:text-brand-navy underline">
-                        aviso de privacidad
-                      </Link>
-                      .
-                    </p>
                   </form>
 
                   <div className="mt-7 border-t border-neutral-200 pt-5 text-center text-sm text-neutral-500">
