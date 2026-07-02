@@ -30,6 +30,9 @@ const BENEFICIOS = [
 export default function RegistroPage() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [terminosOpen, setTerminosOpen] = useState(false);
+  const [terminosAceptados, setTerminosAceptados] = useState(false);
+  const [pendiente, setPendiente] = useState<RegisterInput | null>(null);
 
   const {
     register,
@@ -47,11 +50,10 @@ export default function RegistroPage() {
       cedula: "",
       password: "",
       password_confirmation: "",
-      acepta_terminos: false,
     },
   });
 
-  const onSubmit = async (values: RegisterInput) => {
+  const confirmarRegistro = async (values: RegisterInput) => {
     setSubmitting(true);
     try {
       await registrarBroker({
@@ -62,7 +64,7 @@ export default function RegistroPage() {
         telefono: values.telefono,
         cedula: values.cedula,
         password: values.password,
-        acepta_terminos: values.acepta_terminos,
+        acepta_terminos: true,
         terminos_version: TERMINOS_VERSION,
       });
 
@@ -87,6 +89,24 @@ export default function RegistroPage() {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  // Formulario valido: si ya aceptó los términos, reintenta el registro directo
+  // (sin volver a abrir el modal). Si no, abre el modal de términos.
+  const onValid = (values: RegisterInput) => {
+    if (terminosAceptados) {
+      void confirmarRegistro(values);
+      return;
+    }
+    setPendiente(values);
+    setTerminosOpen(true);
+  };
+
+  const aceptarTerminos = () => {
+    if (!pendiente) return;
+    setTerminosAceptados(true);
+    setTerminosOpen(false);
+    void confirmarRegistro(pendiente);
   };
 
   return (
@@ -150,7 +170,7 @@ export default function RegistroPage() {
                   </p>
 
                   <form
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit(onValid)}
                     className="mt-7 space-y-5"
                     noValidate
                   >
@@ -275,27 +295,17 @@ export default function RegistroPage() {
                       </Field>
                     </div>
 
-                    <div className="flex flex-col gap-1.5">
-                      <div className="flex items-start gap-3 text-sm text-neutral-600">
-                        <input
-                          id="acepta_terminos"
-                          type="checkbox"
-                          disabled={submitting}
-                          className="text-brand-navy focus:ring-brand-navy/20 mt-0.5 h-5 w-5 shrink-0 rounded border-neutral-300"
-                          {...register("acepta_terminos")}
-                        />
-                        <label htmlFor="acepta_terminos">
-                          He leído y acepto los{" "}
-                          <TerminosModal triggerClassName="text-brand-navy font-medium underline" />{" "}
-                          y el aviso de privacidad.
-                        </label>
-                      </div>
-                      {errors.acepta_terminos && (
-                        <p className="text-state-danger text-xs font-medium">
-                          {errors.acepta_terminos.message}
-                        </p>
-                      )}
-                    </div>
+                    {terminosAceptados ? (
+                      <p className="text-state-success flex items-center justify-center gap-1.5 text-center text-xs font-medium">
+                        <CheckCircle2 className="h-4 w-4" />
+                        Términos y condiciones aceptados
+                      </p>
+                    ) : (
+                      <p className="text-center text-xs text-neutral-500">
+                        Al continuar te mostraremos los términos y condiciones
+                        que debes aceptar para crear tu cuenta.
+                      </p>
+                    )}
 
                     <div className="mt-4 flex justify-center">
                       <button
@@ -317,6 +327,12 @@ export default function RegistroPage() {
                       </button>
                     </div>
                   </form>
+
+                  <TerminosModal
+                    open={terminosOpen}
+                    onClose={() => setTerminosOpen(false)}
+                    onAccept={aceptarTerminos}
+                  />
 
                   <div className="mt-7 border-t border-neutral-200 pt-5 text-center text-sm text-neutral-500">
                     ¿Ya tienes una cuenta?{" "}
