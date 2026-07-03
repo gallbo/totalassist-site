@@ -13,6 +13,8 @@ import { registerSchema, type RegisterInput } from "@/lib/schemas/auth";
 import { siteConfig } from "@/lib/site-config";
 import { TERMINOS_VERSION } from "@/lib/terminos";
 import { TerminosModal } from "@/components/terminos-modal";
+import { PRIVACIDAD_CONSENTIMIENTO, PRIVACIDAD_VERSION } from "@/lib/privacidad";
+import { AvisoPrivacidadModal } from "@/components/aviso-privacidad-modal";
 import { cn } from "@/lib/utils";
 
 const ERROR_FIELD_MAP: Record<string, keyof RegisterInput> = {
@@ -30,9 +32,10 @@ const BENEFICIOS = [
 export default function RegistroPage() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [terminosOpen, setTerminosOpen] = useState(false);
+  const [terminosOpen, setTerminosOpen] = useState(true);
   const [terminosAceptados, setTerminosAceptados] = useState(false);
-  const [pendiente, setPendiente] = useState<RegisterInput | null>(null);
+  const [privacidadOpen, setPrivacidadOpen] = useState(false);
+  const [privacidadAceptada, setPrivacidadAceptada] = useState(false);
 
   const {
     register,
@@ -66,6 +69,8 @@ export default function RegistroPage() {
         password: values.password,
         acepta_terminos: true,
         terminos_version: TERMINOS_VERSION,
+        acepta_privacidad: true,
+        privacidad_version: PRIVACIDAD_VERSION,
       });
 
       setSuccess(true);
@@ -91,22 +96,22 @@ export default function RegistroPage() {
     }
   };
 
-  // Formulario valido: si ya aceptó los términos, reintenta el registro directo
-  // (sin volver a abrir el modal). Si no, abre el modal de términos.
+  // Las aceptaciones se hacen en los popups al abrir la vista; el boton de
+  // envio queda bloqueado hasta que ambas casillas esten marcadas.
   const onValid = (values: RegisterInput) => {
-    if (terminosAceptados) {
-      void confirmarRegistro(values);
-      return;
-    }
-    setPendiente(values);
-    setTerminosOpen(true);
+    void confirmarRegistro(values);
   };
 
+  // Al aceptar los terminos se cierra su popup y se abre el del aviso.
   const aceptarTerminos = () => {
-    if (!pendiente) return;
     setTerminosAceptados(true);
     setTerminosOpen(false);
-    void confirmarRegistro(pendiente);
+    setPrivacidadOpen(true);
+  };
+
+  const aceptarPrivacidad = () => {
+    setPrivacidadAceptada(true);
+    setPrivacidadOpen(false);
   };
 
   return (
@@ -295,22 +300,75 @@ export default function RegistroPage() {
                       </Field>
                     </div>
 
-                    {terminosAceptados ? (
-                      <p className="text-state-success flex items-center justify-center gap-1.5 text-center text-xs font-medium">
-                        <CheckCircle2 className="h-4 w-4" />
-                        Términos y condiciones aceptados
-                      </p>
-                    ) : (
-                      <p className="text-center text-xs text-neutral-500">
-                        Al continuar te mostraremos los términos y condiciones
-                        que debes aceptar para crear tu cuenta.
-                      </p>
-                    )}
+                    <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-600">
+                      <input
+                        type="checkbox"
+                        checked={terminosAceptados}
+                        onChange={() => {
+                          if (terminosAceptados) {
+                            setTerminosAceptados(false);
+                          } else {
+                            setTerminosOpen(true);
+                          }
+                        }}
+                        className="accent-brand-navy mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
+                      />
+                      <span>
+                        He leído y acepto los{" "}
+                        <a
+                          href="/terminos"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-brand-navy font-semibold hover:underline"
+                        >
+                          Términos y Condiciones
+                        </a>
+                        .
+                      </span>
+                    </label>
+
+                    <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-600">
+                      <input
+                        type="checkbox"
+                        checked={privacidadAceptada}
+                        onChange={() => {
+                          if (privacidadAceptada) {
+                            setPrivacidadAceptada(false);
+                          } else {
+                            setPrivacidadOpen(true);
+                          }
+                        }}
+                        className="accent-brand-navy mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
+                      />
+                      <span>
+                        {PRIVACIDAD_CONSENTIMIENTO.pre}
+                        <a
+                          href="/avisodeprivacidadagentes"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-brand-navy font-semibold hover:underline"
+                        >
+                          totalclaimassist.com/avisodeprivacidadagentes
+                        </a>
+                        {PRIVACIDAD_CONSENTIMIENTO.mid}
+                        <a
+                          href={PRIVACIDAD_CONSENTIMIENTO.urlPortal}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-brand-navy font-semibold hover:underline"
+                        >
+                          totalclaimassist.app/privacidad
+                        </a>
+                        {PRIVACIDAD_CONSENTIMIENTO.post}
+                      </span>
+                    </label>
 
                     <div className="mt-4 flex justify-center">
                       <button
                         type="submit"
-                        disabled={submitting}
+                        disabled={
+                          submitting || !terminosAceptados || !privacidadAceptada
+                        }
                         className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy inline-flex w-full items-center justify-center gap-2 rounded-pill px-10 py-4 text-base font-semibold shadow-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-14 sm:py-4 sm:text-lg"
                       >
                         {submitting ? (
@@ -328,11 +386,13 @@ export default function RegistroPage() {
                     </div>
                   </form>
 
-                  <TerminosModal
-                    open={terminosOpen}
-                    onClose={() => setTerminosOpen(false)}
-                    onAccept={aceptarTerminos}
+                  <AvisoPrivacidadModal
+                    open={privacidadOpen}
+                    onAccept={aceptarPrivacidad}
+                    integralHref="/avisodeprivacidadagentes"
                   />
+
+                  <TerminosModal open={terminosOpen} onAccept={aceptarTerminos} />
 
                   <div className="mt-7 border-t border-neutral-200 pt-5 text-center text-sm text-neutral-500">
                     ¿Ya tienes una cuenta?{" "}

@@ -5,11 +5,12 @@ import { Logo } from "@/components/layout/logo";
 import { AvisoPrivacidadContenido } from "@/components/aviso-privacidad-contenido";
 
 export const metadata: Metadata = {
-  title: "Aviso de privacidad",
-  description: "Aviso de privacidad de Total Assist para agentes de seguros.",
+  title: "Aviso de privacidad — Agentes de seguros",
+  description:
+    "Aviso de privacidad integral de Claim Assist México, S.C. para agentes de seguros.",
 };
 
-export default function PrivacidadPage() {
+export default function AvisoPrivacidadAgentesPage() {
   return (
     <div className="min-h-svh bg-neutral-50 text-neutral-900">
       <header className="border-b border-neutral-200 bg-white">

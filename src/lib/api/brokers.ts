@@ -11,6 +11,8 @@ export type RegistrarBrokerInput = {
   password: string;
   acepta_terminos: boolean;
   terminos_version: string;
+  acepta_privacidad: boolean;
+  privacidad_version: string;
 };
 
 export type RegistrarBrokerResponse = {
