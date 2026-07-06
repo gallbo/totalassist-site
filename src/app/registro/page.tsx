@@ -13,7 +13,10 @@ import { registerSchema, type RegisterInput } from "@/lib/schemas/auth";
 import { siteConfig } from "@/lib/site-config";
 import { TERMINOS_VERSION } from "@/lib/terminos";
 import { TerminosModal } from "@/components/terminos-modal";
-import { PRIVACIDAD_CONSENTIMIENTO, PRIVACIDAD_VERSION } from "@/lib/privacidad";
+import {
+  PRIVACIDAD_CONSENTIMIENTO,
+  PRIVACIDAD_VERSION,
+} from "@/lib/privacidad";
 import { AvisoPrivacidadModal } from "@/components/aviso-privacidad-modal";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +39,7 @@ export default function RegistroPage() {
   const [terminosAceptados, setTerminosAceptados] = useState(false);
   const [privacidadOpen, setPrivacidadOpen] = useState(false);
   const [privacidadAceptada, setPrivacidadAceptada] = useState(false);
+  const [secuenciaInicial, setSecuenciaInicial] = useState(true);
 
   const {
     register,
@@ -102,16 +106,21 @@ export default function RegistroPage() {
     void confirmarRegistro(values);
   };
 
-  // Al aceptar los terminos se cierra su popup y se abre el del aviso.
+  // En la secuencia inicial (al abrir la vista) aceptar los terminos encadena
+  // el aviso. Si el usuario reabre los terminos desde su casilla, solo se
+  // reabre ese popup, no el del aviso.
   const aceptarTerminos = () => {
     setTerminosAceptados(true);
     setTerminosOpen(false);
-    setPrivacidadOpen(true);
+    if (secuenciaInicial) {
+      setPrivacidadOpen(true);
+    }
   };
 
   const aceptarPrivacidad = () => {
     setPrivacidadAceptada(true);
     setPrivacidadOpen(false);
+    setSecuenciaInicial(false);
   };
 
   return (
@@ -138,10 +147,10 @@ export default function RegistroPage() {
 
         <div className="mt-10 grid flex-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
           <aside className="hidden lg:col-span-5 lg:block">
-            <p className="text-brand-yellow text-xs font-semibold uppercase tracking-widest">
+            <p className="text-brand-yellow text-xs font-semibold tracking-widest uppercase">
               Crea tu cuenta
             </p>
-            <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.05] tracking-tight xl:text-5xl">
+            <h1 className="mt-4 text-4xl leading-[1.05] font-bold tracking-tight text-balance xl:text-5xl">
               Empieza a usar{" "}
               <span className="text-brand-yellow">Total Assist</span> en minutos
             </h1>
@@ -152,7 +161,10 @@ export default function RegistroPage() {
 
             <ul className="mt-8 space-y-3">
               {BENEFICIOS.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-sm text-neutral-200">
+                <li
+                  key={b}
+                  className="flex items-start gap-3 text-sm text-neutral-200"
+                >
                   <CheckCircle2 className="text-brand-yellow mt-0.5 h-5 w-5 shrink-0" />
                   <span>{b}</span>
                 </li>
@@ -300,76 +312,80 @@ export default function RegistroPage() {
                       </Field>
                     </div>
 
-                    <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-600">
-                      <input
-                        type="checkbox"
-                        checked={terminosAceptados}
-                        onChange={() => {
-                          if (terminosAceptados) {
-                            setTerminosAceptados(false);
-                          } else {
-                            setTerminosOpen(true);
-                          }
-                        }}
-                        className="accent-brand-navy mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
-                      />
-                      <span>
-                        He leído y acepto los{" "}
-                        <a
-                          href="/terminos"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-brand-navy font-semibold hover:underline"
-                        >
-                          Términos y Condiciones
-                        </a>
-                        .
-                      </span>
-                    </label>
+                    <div className="space-y-2">
+                      <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-600">
+                        <input
+                          type="checkbox"
+                          checked={terminosAceptados}
+                          onChange={() => {
+                            if (terminosAceptados) {
+                              setTerminosAceptados(false);
+                            } else {
+                              setTerminosOpen(true);
+                            }
+                          }}
+                          className="accent-brand-navy mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
+                        />
+                        <span>
+                          He leído y acepto los{" "}
+                          <a
+                            href="/terminos"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-brand-navy font-semibold hover:underline"
+                          >
+                            Términos y Condiciones
+                          </a>
+                          .
+                        </span>
+                      </label>
 
-                    <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-600">
-                      <input
-                        type="checkbox"
-                        checked={privacidadAceptada}
-                        onChange={() => {
-                          if (privacidadAceptada) {
-                            setPrivacidadAceptada(false);
-                          } else {
-                            setPrivacidadOpen(true);
-                          }
-                        }}
-                        className="accent-brand-navy mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
-                      />
-                      <span>
-                        {PRIVACIDAD_CONSENTIMIENTO.pre}
-                        <a
-                          href="/avisodeprivacidadagentes"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-brand-navy font-semibold hover:underline"
-                        >
-                          totalclaimassist.com/avisodeprivacidadagentes
-                        </a>
-                        {PRIVACIDAD_CONSENTIMIENTO.mid}
-                        <a
-                          href={PRIVACIDAD_CONSENTIMIENTO.urlPortal}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-brand-navy font-semibold hover:underline"
-                        >
-                          totalclaimassist.app/privacidad
-                        </a>
-                        {PRIVACIDAD_CONSENTIMIENTO.post}
-                      </span>
-                    </label>
+                      <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-600">
+                        <input
+                          type="checkbox"
+                          checked={privacidadAceptada}
+                          onChange={() => {
+                            if (privacidadAceptada) {
+                              setPrivacidadAceptada(false);
+                            } else {
+                              setPrivacidadOpen(true);
+                            }
+                          }}
+                          className="accent-brand-navy mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
+                        />
+                        <span>
+                          {PRIVACIDAD_CONSENTIMIENTO.pre}
+                          <a
+                            href="/avisodeprivacidadagentes"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-brand-navy font-semibold hover:underline"
+                          >
+                            totalclaimassist.com/avisodeprivacidadagentes
+                          </a>
+                          {PRIVACIDAD_CONSENTIMIENTO.mid}
+                          <a
+                            href={PRIVACIDAD_CONSENTIMIENTO.urlPortal}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-brand-navy font-semibold hover:underline"
+                          >
+                            totalclaimassist.app/privacidad
+                          </a>
+                          {PRIVACIDAD_CONSENTIMIENTO.post}
+                        </span>
+                      </label>
+                    </div>
 
                     <div className="mt-4 flex justify-center">
                       <button
                         type="submit"
                         disabled={
-                          submitting || !terminosAceptados || !privacidadAceptada
+                          submitting ||
+                          !terminosAceptados ||
+                          !privacidadAceptada
                         }
-                        className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy inline-flex w-full items-center justify-center gap-2 rounded-pill px-10 py-4 text-base font-semibold shadow-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-14 sm:py-4 sm:text-lg"
+                        className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy rounded-pill inline-flex w-full items-center justify-center gap-2 px-10 py-4 text-base font-semibold shadow-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-14 sm:py-4 sm:text-lg"
                       >
                         {submitting ? (
                           <>
@@ -392,7 +408,10 @@ export default function RegistroPage() {
                     integralHref="/avisodeprivacidadagentes"
                   />
 
-                  <TerminosModal open={terminosOpen} onAccept={aceptarTerminos} />
+                  <TerminosModal
+                    open={terminosOpen}
+                    onAccept={aceptarTerminos}
+                  />
 
                   <div className="mt-7 border-t border-neutral-200 pt-5 text-center text-sm text-neutral-500">
                     ¿Ya tienes una cuenta?{" "}
@@ -425,16 +444,16 @@ function SuccessState() {
         ¡Tu cuenta está lista!
       </h2>
       <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-600">
-        Te enviamos un correo de bienvenida con los siguientes pasos. Para empezar
-        a usar Total Assist inicia sesión en el portal con el correo y la
-        contraseña que registraste.
+        Te enviamos un correo de bienvenida con los siguientes pasos. Para
+        empezar a usar Total Assist inicia sesión en el portal con el correo y
+        la contraseña que registraste.
       </p>
 
       <a
         href={`${siteConfig.appUrl}/login`}
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy mt-7 inline-flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 text-sm font-semibold transition-colors"
+        className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy rounded-pill mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold transition-colors"
       >
         Iniciar sesión
         <ArrowRight className="h-4 w-4" />
@@ -467,10 +486,7 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label
-        htmlFor={id}
-        className="text-brand-navy text-sm font-medium"
-      >
+      <label htmlFor={id} className="text-brand-navy text-sm font-medium">
         {label}
         {optional && (
           <span className="ml-1 text-xs font-normal text-neutral-400">
@@ -479,10 +495,10 @@ function Field({
         )}
       </label>
       {children}
-      {hint && !error && (
-        <p className="text-xs text-neutral-500">{hint}</p>
+      {hint && !error && <p className="text-xs text-neutral-500">{hint}</p>}
+      {error && (
+        <p className="text-state-danger text-xs font-medium">{error}</p>
       )}
-      {error && <p className="text-state-danger text-xs font-medium">{error}</p>}
     </div>
   );
 }
@@ -516,7 +532,7 @@ function PasswordField({
         type="button"
         aria-label={shown ? "Ocultar contraseña" : "Mostrar contraseña"}
         onClick={() => setShown((v) => !v)}
-        className="hover:text-brand-navy absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 transition-colors"
+        className="hover:text-brand-navy absolute top-1/2 right-3 -translate-y-1/2 text-neutral-400 transition-colors"
         tabIndex={-1}
       >
         {shown ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
