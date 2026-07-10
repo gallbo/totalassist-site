@@ -27,7 +27,7 @@ export function Contacto({
     >
       <BackgroundPattern variant="corner" invert />
       <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-8">
-        <div className="lg:col-span-6">
+        <div className="min-w-0 lg:col-span-6">
           <p className="text-brand-yellow text-xs font-semibold uppercase tracking-widest">
             {copy.eyebrow}
           </p>
@@ -77,7 +77,7 @@ export function Contacto({
           )}
         </div>
 
-        <div className="lg:col-span-6">
+        <div className="min-w-0 lg:col-span-6">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur sm:p-9">
             <p className="text-xs font-semibold uppercase tracking-widest text-neutral-300">
               {variant === "landing" ? "También puedes contactarnos" : "Otras formas de contacto"}
@@ -166,17 +166,17 @@ function ContactRow({
       <span
         className={
           primary
-            ? "bg-brand-yellow text-brand-navy inline-flex h-12 w-12 items-center justify-center rounded-full"
-            : "inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white"
+            ? "bg-brand-yellow text-brand-navy inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
+            : "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white"
         }
       >
         <Icon className="h-5 w-5" />
       </span>
-      <span>
+      <span className="min-w-0">
         <span className="block text-xs uppercase tracking-wide text-neutral-400">
           {title}
         </span>
-        <span className="group-hover:text-brand-yellow block text-base font-medium text-white transition-colors">
+        <span className="group-hover:text-brand-yellow block text-base font-medium text-white transition-colors [overflow-wrap:anywhere]">
           {value}
         </span>
       </span>

@@ -12,7 +12,7 @@ import { Sedes } from "@/components/sections/sedes";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { Faq } from "@/components/sections/faq";
 import { Contacto } from "@/components/sections/contacto";
-import { homeFaqs, homeTagline, siteConfig } from "@/lib/site-config";
+import { homeFaqs, homeTagline } from "@/lib/site-config";
 
 // La home corp usa los defaults del layout root (mismo title/description/og/twitter).
 // El layout ya tiene canonical "/" + og:image, así que solo declaramos alternates
@@ -56,8 +56,7 @@ export default function Home() {
         <CtaBanner
           title={homeTagline}
           subtitle="Suma a Total Assist como respaldo profesional de tu cartera."
-          ctaLabel="Habla con un asesor"
-          ctaHref={siteConfig.whatsappUrl}
+          hideCta
         />
         <Contacto variant="corp" />
       </main>

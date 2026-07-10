@@ -17,7 +17,7 @@ export function HomeValores() {
           {homeValores.map((v, i) => (
             <article
               key={v.title}
-              className="rounded-2xl border border-neutral-200 bg-white p-6 transition-shadow hover:shadow-md"
+              className="flex flex-col items-center rounded-2xl border border-neutral-200 bg-white p-6 text-center transition-shadow hover:shadow-md"
             >
               <span className="bg-brand-yellow/15 text-brand-navy inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold">
                 {String(i + 1).padStart(2, "0")}

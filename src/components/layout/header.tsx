@@ -58,8 +58,7 @@ export function Header({ variant = "corp" }: { variant?: Variant }) {
 
   useEffect(() => {
     const onScroll = () => {
-      const threshold = window.innerHeight * 0.6;
-      setScrolled(window.scrollY > threshold);
+      setScrolled(window.scrollY > 8);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { Logo } from "@/components/layout/logo";
-import { siteConfig, sedes, servicios } from "@/lib/site-config";
+import { siteConfig, servicios } from "@/lib/site-config";
 
 export function Footer() {
   return (
     <footer className="bg-brand-navy text-neutral-300">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
+      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
         <div className="md:col-span-1">
           <Logo variant="shield" className="h-12 w-auto brightness-0 invert" />
-          <p className="mt-4 text-sm text-neutral-400">
-            Respaldo profesional para agentes de seguros.{" "}
-            {siteConfig.yearsExperience}+ años gestionando reclamaciones.
-          </p>
         </div>
 
         <div>
@@ -20,19 +16,6 @@ export function Footer() {
             {servicios.map((s) => (
               <li key={s} className="text-neutral-400">
                 {s}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-sm font-semibold text-white">Sedes</h4>
-          <ul className="mt-3 space-y-2 text-sm text-neutral-400">
-            {sedes.map((s) => (
-              <li key={s.city}>
-                <span className="text-white">{s.city}</span>
-                <br />
-                <span className="text-xs">{s.address}</span>
               </li>
             ))}
           </ul>

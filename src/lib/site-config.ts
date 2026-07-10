@@ -4,7 +4,7 @@ export const siteConfig = {
   phone: "(55) 6145 5557",
   phoneRaw: "525561455557",
   whatsappUrl: "https://wa.me/525561455557",
-  hours: "Lunes a Viernes, 08:00 a 18:00",
+  hours: "Lunes a viernes de 9:00 a.m. a 7:00 p.m. (hora del centro de México)",
   email: "contacto@totalclaimassist.com",
   yearsExperience: 27,
   freeUntil: "diciembre 2026",
@@ -71,7 +71,7 @@ export const proceso = [
   {
     step: "03",
     title: "Gestión continua",
-    body: "Damos seguimiento, empujamos tiempos y mantenemos a tu cliente informado.",
+    body: "Damos seguimiento, gestionamos los tiempos y mantenemos a tu cliente informado.",
   },
   {
     step: "04",
@@ -128,6 +128,7 @@ export const servicios = [
   "Gestión de siniestros",
   "Consultoría en seguros",
   "Conferencias y capacitaciones",
+  "Defensa legal del agente de seguros",
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -160,10 +161,18 @@ export const homeMomento = {
 };
 
 export const homeFuncionamiento = {
-  eyebrow: "Cómo funciona Total Assist",
+  eyebrow: "¿Cómo funciona Total Assist?",
   title: "Respaldo profesional en la gestión del reclamo",
   intro:
-    "Cuando tu cliente sufre un siniestro, te contacta a ti. Tú ingresas a nuestra plataforma, capturas la información de la póliza y registras el siniestro. A partir de ese momento nosotros nos hacemos cargo de:",
+    "Cuando tu cliente sufre un siniestro, te contacta a ti. Tú registras el caso en unos minutos y, a partir de ese momento, nosotros nos hacemos cargo.",
+  agentTitle: "Lo que haces tú",
+  agentSteps: [
+    "Ingresas a nuestra plataforma",
+    "Capturas la información de la póliza",
+    "Registras el siniestro",
+  ],
+  agentClosing: "¡Listo! El caso queda en nuestras manos.",
+  teamTitle: "De lo que se encarga Total Assist",
   steps: [
     {
       title: "Integrar correctamente el expediente",
@@ -171,7 +180,7 @@ export const homeFuncionamiento = {
     },
     {
       title: "Dar seguimiento técnico y mantener al cliente informado",
-      body: "Empujamos tiempos con la aseguradora y mantenemos comunicación ordenada con el asegurado en cada etapa.",
+      body: "Damos seguimiento a los tiempos con la aseguradora y mantenemos comunicación ordenada con el asegurado en cada etapa.",
     },
     {
       title: "Acompañar hasta la resolución del caso",
@@ -252,32 +261,32 @@ export const homeNosotros = {
 export const homeValores = [
   {
     title: "Profesionalismo",
-    body: "Precisión, orden y experiencia en cada caso que tomamos.",
+    body: "Cada caso lo maneja un equipo con experiencia técnica en seguros, con orden y criterio.",
   },
   {
     title: "Transparencia",
-    body: "Comunicación clara y seguimiento puntual de cada etapa del expediente.",
+    body: "Sabes en qué etapa está tu reclamación en todo momento, sin tener que perseguirnos.",
   },
   {
     title: "Empatía",
-    body: "Entendemos lo que un siniestro significa para el asegurado y para el agente.",
+    body: "Tratamos a tu asegurado como tú lo harías: con claridad y sin tecnicismos innecesarios.",
   },
   {
     title: "Confianza",
-    body: "Operamos en nombre del agente, respetando siempre su relación con el cliente.",
+    body: "Operamos siempre a tu nombre; tu relación con el cliente es tuya y así se queda.",
   },
   {
     title: "Servicio humano",
-    body: "Atención cercana, clara y responsable en cada interacción.",
+    body: "Hablas con personas que dan la cara, no con formularios ni respuestas automáticas.",
   },
   {
     title: "Excelencia operativa",
-    body: "Procesos bien integrados que previenen errores y aceleran resoluciones.",
+    body: "Procesos definidos que evitan errores, papeles incompletos y retrabajos con la aseguradora.",
   },
 ];
 
 export const homeExperiencia = {
-  eyebrow: "Más de 27 años de experiencia",
+  eyebrow: "El momento decisivo",
   title: "Fortalece la confianza de tu cliente en el momento más importante",
   body: "El siniestro es donde realmente se define la percepción del servicio del agente. Cuando tu cliente recibe acompañamiento estructurado durante su reclamación, tu valor como asesor se confirma.",
   bullets: [
@@ -321,16 +330,16 @@ export const homeTagline =
 // ─────────────────────────────────────────────────────────────────────────────
 export const homeImages = {
   hero: {
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1100&h=1300&q=80&auto=format&fit=crop",
-    alt: "Equipo profesional colaborando en una sesión de trabajo",
+    src: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=1100&h=1300&q=80&auto=format&fit=crop",
+    alt: "Dos profesionales cerrando un acuerdo con un apretón de manos",
   },
   momento: {
     src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1100&h=1300&q=80&auto=format&fit=crop",
     alt: "Profesional revisando documentación de una reclamación",
   },
   nosotros: {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=900&q=80&auto=format&fit=crop",
-    alt: "Espacio de trabajo de Total Assist",
+    src: "https://images.unsplash.com/photo-1714974528703-e5ad41abc259?w=1400&h=900&q=80&auto=format&fit=crop",
+    alt: "Asesora atendiendo a un cliente en una reunión de trabajo",
   },
 };
 

@@ -1,21 +1,18 @@
 import { ArrowRight } from "lucide-react";
 import { BackgroundPattern } from "@/components/layout/background-pattern";
-import { homeHero, homeImages, siteConfig } from "@/lib/site-config";
+import { homeHero, homeImages } from "@/lib/site-config";
 
 export function HomeHero() {
   return (
     <section className="bg-brand-navy relative flex min-h-svh items-center text-white">
-      <BackgroundPattern variant="auth" invert />
+      <BackgroundPattern variant="subtle" invert className="opacity-40" />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 pt-16 pb-6 sm:px-6 sm:pt-20 sm:pb-8 lg:px-8 lg:pt-24 lg:pb-12">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-10">
           <div className="min-w-0 lg:col-span-7 lg:flex lg:flex-col lg:justify-center">
             <div className="inline-flex flex-col">
-              <p className="text-lg font-bold leading-none tracking-tight sm:text-2xl md:text-3xl">
-                TOTAL <span className="text-brand-yellow">ASSIST</span>
-              </p>
-              <span className="bg-brand-yellow mt-2 h-px w-full" />
-              <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.28em] text-neutral-400 sm:text-[11px]">
+              <span className="bg-brand-yellow h-px w-10" />
+              <p className="mt-3 text-[10px] font-medium uppercase tracking-[0.28em] text-neutral-400 sm:text-[11px]">
                 {homeHero.eyebrow}
               </p>
             </div>
@@ -74,10 +71,10 @@ export function HomeHero() {
                     Equipo dedicado
                   </p>
                   <p className="text-brand-yellow mt-1 text-2xl font-bold">
-                    +{siteConfig.yearsExperience} años
+                    Todos los ramos
                   </p>
                   <p className="mt-1 text-xs text-neutral-300">
-                    gestionando siniestros en todos los ramos
+                    gestionamos tu siniestro de principio a fin
                   </p>
                 </div>
               </div>

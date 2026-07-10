@@ -6,6 +6,7 @@ type Props = {
   subtitle?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  hideCta?: boolean;
 };
 
 export function CtaBanner({
@@ -13,6 +14,7 @@ export function CtaBanner({
   subtitle = "Cero compromiso. Activamos el respaldo en cuanto te registras.",
   ctaLabel = "Regístrate ahora",
   ctaHref = "/registro",
+  hideCta = false,
 }: Props) {
   const isInternal = ctaHref.startsWith("/");
   const className =
@@ -20,7 +22,13 @@ export function CtaBanner({
 
   return (
     <section className="bg-brand-yellow py-14">
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-4 text-center sm:px-6 md:flex-row md:text-left lg:px-8">
+      <div
+        className={
+          hideCta
+            ? "mx-auto w-full max-w-3xl px-4 text-center sm:px-6 lg:px-8"
+            : "mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-4 text-center sm:px-6 md:flex-row md:text-left lg:px-8"
+        }
+      >
         <div>
           <h2 className="text-brand-navy text-2xl font-bold tracking-tight sm:text-3xl">
             {title}
@@ -29,7 +37,7 @@ export function CtaBanner({
             {subtitle}
           </p>
         </div>
-        {isInternal ? (
+        {hideCta ? null : isInternal ? (
           <Link href={ctaHref} className={className}>
             {ctaLabel}
           </Link>

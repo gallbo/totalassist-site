@@ -1,5 +1,5 @@
 import { Quote } from "lucide-react";
-import { homeImages, homeMomento, siteConfig } from "@/lib/site-config";
+import { homeImages, homeMomento } from "@/lib/site-config";
 
 export function HomeMomento() {
   return (
@@ -34,24 +34,6 @@ export function HomeMomento() {
               <p className="text-lg font-medium leading-relaxed sm:text-xl">
                 {homeMomento.highlight}
               </p>
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <p className="text-xs uppercase tracking-widest text-neutral-300">
-                  Respaldo de equipo
-                </p>
-                <p className="mt-2 text-sm text-neutral-200">
-                  {homeMomento.credential}
-                </p>
-              </div>
-              <div className="mt-5 flex items-center gap-3">
-                <span className="bg-brand-yellow text-brand-navy inline-flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold">
-                  {siteConfig.yearsExperience}+
-                </span>
-                <p className="text-sm text-neutral-200">
-                  años atendiendo siniestros
-                  <br />
-                  en todos los ramos
-                </p>
-              </div>
             </div>
           </div>
         </aside>

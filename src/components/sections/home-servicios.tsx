@@ -50,18 +50,21 @@ export function HomeServicios() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={siteConfig.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-brand-navy hover:text-brand-yellow-hover mt-6 inline-flex items-center gap-2 text-sm font-semibold transition-colors"
-                >
-                  Solicita información
-                  <ArrowRight className="h-4 w-4" />
-                </a>
               </article>
             );
           })}
+        </div>
+
+        <div className="mt-12 text-center">
+          <a
+            href={siteConfig.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy inline-flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 text-sm font-semibold transition-colors"
+          >
+            Solicita información
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </div>
     </section>
