@@ -101,6 +101,18 @@ export const faqs = [
     q: "¿En qué momento intervienen?",
     a: "Desde el primer aviso del siniestro hasta la resolución final del expediente.",
   },
+  {
+    q: "¿Cómo crear mi cuenta?",
+    a: "Regístrate gratis con tu cédula de agente. En este video te mostramos el paso a paso para crear tu cuenta en Total Assist.",
+    videoSrc:
+      "https://sttcamediaprod.blob.core.windows.net/tutoriales/crear-cuenta.mp4",
+  },
+  {
+    q: "¿Cómo dar de alta un caso?",
+    a: "Una vez dentro del portal das de alta el siniestro de tu asegurado en unos minutos. Este video te guía en el registro de un caso.",
+    videoSrc:
+      "https://sttcamediaprod.blob.core.windows.net/tutoriales/alta-de-caso.mp4",
+  },
 ];
 
 export const sedes = [
@@ -317,6 +329,18 @@ export const homeFaqs = [
   {
     q: "¿Cómo se integra Total Assist a mi operación?",
     a: "Te damos acceso a una plataforma donde registras al asegurado y al siniestro; a partir de ahí nuestro equipo toma el caso y te mantiene informado en cada etapa.",
+  },
+  {
+    q: "¿Cómo crear mi cuenta?",
+    a: "Regístrate gratis con tu cédula de agente. En este video te mostramos el paso a paso para crear tu cuenta en Total Assist.",
+    videoSrc:
+      "https://sttcamediaprod.blob.core.windows.net/tutoriales/crear-cuenta.mp4",
+  },
+  {
+    q: "¿Cómo dar de alta un caso?",
+    a: "Una vez dentro del portal das de alta el siniestro de tu asegurado en unos minutos. Este video te guía en el registro de un caso.",
+    videoSrc:
+      "https://sttcamediaprod.blob.core.windows.net/tutoriales/alta-de-caso.mp4",
   },
 ];
 

@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { faqs as defaultFaqs } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-type Item = { q: string; a: string };
+type Item = { q: string; a: string; videoSrc?: string };
 
 type Props = {
   eyebrow?: string;
@@ -60,9 +60,19 @@ export function Faq({
                   )}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-sm leading-relaxed text-neutral-600 sm:text-base">
-                      {item.a}
-                    </p>
+                    {item.videoSrc ? (
+                      <video
+                        controls
+                        preload="none"
+                        className="aspect-video w-full rounded-xl bg-black"
+                      >
+                        <source src={item.videoSrc} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <p className="text-sm leading-relaxed text-neutral-600 sm:text-base">
+                        {item.a}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
