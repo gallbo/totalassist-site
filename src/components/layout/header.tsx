@@ -113,8 +113,6 @@ export function Header({ variant = "corp" }: { variant?: Variant }) {
           {cross.external ? (
             <a
               href={cross.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className={cn(
                 "hover:text-brand-yellow text-sm font-medium transition-colors",
                 scrolled ? "text-neutral-500" : "text-white/80",
@@ -184,8 +182,6 @@ export function Header({ variant = "corp" }: { variant?: Variant }) {
           {cross.external ? (
             <a
               href={cross.href}
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className={cn(
                 "rounded-md px-3 py-3 text-sm font-medium",
