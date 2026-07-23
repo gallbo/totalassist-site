@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { landingImages, siteConfig } from "@/lib/site-config";
 
 export function OpeningHero() {
   return (
     <section className="bg-brand-navy relative flex min-h-svh items-center text-white">
-      <BackgroundPattern variant="auth" invert />
-
       <div className="relative mx-auto w-full max-w-7xl px-4 pt-16 pb-6 sm:px-6 sm:pt-20 sm:pb-8 lg:px-8 lg:pt-24 lg:pb-12">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-10">
           <div className="min-w-0 lg:col-span-7 lg:flex lg:flex-col lg:justify-center">
