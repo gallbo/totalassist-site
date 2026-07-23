@@ -49,8 +49,6 @@ export function Contacto({
               </Link>
               <a
                 href={`${siteConfig.appUrl}/login`}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="rounded-pill border border-white/30 px-7 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
                 Ya tengo cuenta
