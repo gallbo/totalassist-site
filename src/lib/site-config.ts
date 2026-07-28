@@ -91,7 +91,7 @@ export const faqs = [
   },
   {
     q: "¿Qué tipo de siniestros atienden?",
-    a: "Todos los ramos. No nos limitamos a gastos médicos: atendemos auto, hogar, daños, vida, transporte y más.",
+    a: "Atendemos siniestros de auto, vida y gastos médicos.",
   },
   {
     q: "¿El asegurado sabrá que ustedes están detrás?",
@@ -249,7 +249,7 @@ export const homeServicios = [
 export const homeNosotros = {
   eyebrow: "Quiénes somos",
   title: "Un equipo especializado en gestión de siniestros",
-  body: "Total Assist nace para fortalecer al agente de seguros, aportando soporte operativo y técnico para que las reclamaciones se gestionen de forma correcta, ordenada y profesional. Nuestro equipo cuenta con más de 27 años de experiencia atendiendo siniestros complejos en todos los ramos.",
+  body: "Total Assist nace para fortalecer al agente de seguros, aportando soporte operativo y técnico para que las reclamaciones se gestionen de forma correcta, ordenada y profesional. Nuestro equipo cuenta con más de 27 años de experiencia atendiendo siniestros complejos.",
   founders: [
     {
       name: "Itzel Paulina Gallardo Cabrera",
@@ -316,7 +316,7 @@ export const homeFaqs = [
   },
   {
     q: "¿Qué tipos de siniestros atienden?",
-    a: "Todos los ramos: auto, hogar, daños, vida, transporte, gastos médicos y más. No nos limitamos a un solo segmento.",
+    a: "Atendemos siniestros de auto, vida y gastos médicos.",
   },
   {
     q: "¿Mi cliente sabrá que no soy yo quien gestiona el reclamo?",

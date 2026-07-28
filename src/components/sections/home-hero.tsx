@@ -68,7 +68,7 @@ export function HomeHero() {
                     Equipo dedicado
                   </p>
                   <p className="text-brand-yellow mt-1 text-2xl font-bold">
-                    Todos los ramos
+                    Auto, vida y gastos médicos
                   </p>
                   <p className="mt-1 text-xs text-neutral-300">
                     gestionamos tu siniestro de principio a fin

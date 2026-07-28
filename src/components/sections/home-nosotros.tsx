@@ -43,7 +43,7 @@ export function HomeNosotros() {
           <div className="grid gap-4 rounded-3xl border border-neutral-200 bg-white p-6 sm:grid-cols-3">
             <Stat value={`+${siteConfig.yearsExperience}`} label="años de experiencia" />
             <Stat value="3" label="sedes en México" />
-            <Stat value="100%" label="ramos atendidos" />
+            <Stat value="3" label="ramos atendidos" />
           </div>
 
           <div className="rounded-3xl border border-neutral-200 bg-white p-6">

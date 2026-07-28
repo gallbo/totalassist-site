@@ -11,7 +11,7 @@ export function Highlights() {
         </div>
         <Stat value={`${siteConfig.yearsExperience}+`} label="años de experiencia" />
         <Stat value="3" label="sedes en México" />
-        <Stat value="100%" label="ramos atendidos" />
+        <Stat value="3" label="ramos atendidos" />
       </div>
     </section>
   );

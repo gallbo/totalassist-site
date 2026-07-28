@@ -6,12 +6,12 @@ const credenciales = [
   {
     icon: Award,
     title: `${siteConfig.yearsExperience}+ años de experiencia`,
-    body: "Equipo con trayectoria comprobada en gestión de siniestros de todos los ramos.",
+    body: "Equipo con trayectoria comprobada en gestión de siniestros.",
   },
   {
     icon: ShieldCheck,
-    title: "Todos los ramos",
-    body: "Auto, hogar, vida, daños, transporte, gastos médicos. No te limitamos a un nicho.",
+    title: "Ramos que atendemos",
+    body: "Auto, vida y gastos médicos. Reclamaciones atendidas de punta a punta.",
   },
   {
     icon: Building2,
