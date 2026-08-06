@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "Total Assist",
   domain: "totalclaimassist.com",
-  phone: "(55) 6145 5557",
-  phoneRaw: "525561455557",
-  whatsappUrl: "https://wa.me/525561455557",
+  phone: "(667) 428 5055",
+  phoneRaw: "526674285055",
+  whatsappUrl: "https://wa.me/526674285055",
   hours: "Lunes a viernes de 9:00 a.m. a 7:00 p.m. (hora del centro de México)",
   email: "contacto@totalclaimassist.com",
   yearsExperience: 27,
