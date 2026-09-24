@@ -1,8 +1,6 @@
 User-agent: *
 Allow: /
-Allow: /inicio
 Disallow: /registro
-Disallow: /_next/
 Disallow: /api/
 
 Sitemap: https://totalclaimassist.com/sitemap.xml

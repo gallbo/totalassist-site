@@ -17,16 +17,16 @@ import { faqs } from "@/lib/site-config";
 // openGraph override en page sobrescribe el del layout entero, así que repetimos
 // todos los campos (incluyendo images) para preservar el preview en redes sociales.
 export const metadata: Metadata = {
-  title: "Total Assist — Respaldo profesional para agentes de seguros",
+  title: "Respaldo profesional para agentes de seguros",
   description:
     "Liberamos tu tiempo, integramos expedientes y damos seguimiento a tus siniestros. Servicio gratuito hasta diciembre 2026.",
-  alternates: { canonical: "/inicio" },
+  alternates: { canonical: "/agentes-de-seguros" },
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: "/inicio",
+    url: "/agentes-de-seguros",
     siteName: "Total Assist",
-    title: "Total Assist — Respaldo profesional para agentes de seguros",
+    title: "Respaldo profesional para agentes de seguros | Total Assist",
     description:
       "Liberamos tu tiempo, integramos expedientes y damos seguimiento a tus siniestros. Gratis hasta diciembre 2026.",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Total Assist — Respaldo profesional para agentes de seguros",
+    title: "Respaldo profesional para agentes de seguros | Total Assist",
     description:
       "Liberamos tu tiempo, integramos expedientes y damos seguimiento a tus siniestros. Gratis hasta diciembre 2026.",
     images: ["/brand/og-image-v3.png"],

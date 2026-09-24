@@ -40,7 +40,7 @@ const CTA: Record<Variant, { label: string; href: string; external: boolean }> =
 };
 
 const CROSS_LINK: Record<Variant, { label: string; href: string; external: boolean }> = {
-  corp: { label: "Para agentes", href: "/inicio", external: false },
+  corp: { label: "Para agentes", href: "/agentes-de-seguros", external: false },
   landing: {
     label: "Iniciar sesión",
     href: `${siteConfig.appUrl}/login`,

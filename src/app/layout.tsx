@@ -36,9 +36,6 @@ export const metadata: Metadata = {
     "indemnización",
     "broker de seguros",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "es_MX",

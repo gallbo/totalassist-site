@@ -347,37 +347,28 @@ export const homeFaqs = [
 export const homeTagline =
   "Un respaldo que trabaja contigo, no en tu lugar.";
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  Imágenes (placeholders Unsplash; reemplazar por assets propios cuando llegue
-//  el material definitivo). Los srcs siguen el patrón Unsplash CDN, así pueden
-//  ajustarse el tamaño/quality desde el querystring sin cambiar el ID.
-// ─────────────────────────────────────────────────────────────────────────────
 export const homeImages = {
   hero: {
-    src: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=1100&h=1300&q=80&auto=format&fit=crop",
+    src: "/img/home-hero.webp",
     alt: "Dos profesionales cerrando un acuerdo con un apretón de manos",
   },
   momento: {
-    src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1100&h=1300&q=80&auto=format&fit=crop",
+    src: "/img/home-momento.webp",
     alt: "Profesional revisando documentación de una reclamación",
-  },
-  nosotros: {
-    src: "https://images.unsplash.com/photo-1714974528703-e5ad41abc259?w=1400&h=900&q=80&auto=format&fit=crop",
-    alt: "Asesora atendiendo a un cliente en una reunión de trabajo",
   },
 };
 
 export const landingImages = {
   hero: {
-    src: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1100&h=1300&q=80&auto=format&fit=crop",
+    src: "/img/agentes-hero.webp",
     alt: "Apretón de manos profesional entre dos agentes de seguros",
   },
   extension: {
-    src: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1100&h=1300&q=80&auto=format&fit=crop",
+    src: "/img/agentes-extension.webp",
     alt: "Equipo profesional analizando un expediente",
   },
   problema: {
-    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1100&h=900&q=80&auto=format&fit=crop",
+    src: "/img/agentes-problema.webp",
     alt: "Escritorio con documentos y reloj — la presión del tiempo en cada reclamación",
   },
 };

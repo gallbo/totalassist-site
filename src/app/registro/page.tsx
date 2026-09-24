@@ -137,7 +137,7 @@ export default function RegistroPage() {
             <Logo variant="compact" priority />
           </Link>
           <Link
-            href="/inicio"
+            href="/agentes-de-seguros"
             className="hover:text-brand-yellow inline-flex items-center gap-2 text-sm font-medium text-white/80 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />

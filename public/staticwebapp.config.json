@@ -1,0 +1,20 @@
+{
+  "trailingSlash": "never",
+  "routes": [
+    {
+      "route": "/inicio",
+      "redirect": "/agentes-de-seguros",
+      "statusCode": 301
+    },
+    {
+      "route": "/inicio/",
+      "redirect": "/agentes-de-seguros",
+      "statusCode": 301
+    },
+    {
+      "route": "/inicio.html",
+      "redirect": "/agentes-de-seguros",
+      "statusCode": 301
+    }
+  ]
+}
