@@ -19,6 +19,7 @@ import {
 } from "@/lib/privacidad";
 import { AvisoPrivacidadModal } from "@/components/aviso-privacidad-modal";
 import { cn } from "@/lib/utils";
+import { registrarEvento } from "@/lib/analitica";
 
 const ERROR_FIELD_MAP: Record<string, keyof RegisterInput> = {
   email_duplicado: "email",
@@ -78,6 +79,7 @@ export default function RegistroPage() {
       });
 
       setSuccess(true);
+      registrarEvento("registro_completo");
       toast.success("Cuenta creada. Te enviamos un correo de bienvenida.");
     } catch (error) {
       if (error instanceof ApiError) {
