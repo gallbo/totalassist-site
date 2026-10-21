@@ -10,6 +10,21 @@
       "route": "/inicio.html",
       "redirect": "/agentes-de-seguros",
       "statusCode": 301
+    },
+    {
+      "route": "/nosotros",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/servicios",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/avisodeprivacidadagentes",
+      "redirect": "/aviso-de-privacidad-agentes",
+      "statusCode": 301
     }
   ]
 }

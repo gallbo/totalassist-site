@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.2,
     },
     {
-      url: `${SITE_URL}/avisodeprivacidadagentes`,
+      url: `${SITE_URL}/aviso-de-privacidad-agentes`,
       lastModified: "2026-08-10",
       changeFrequency: "yearly",
       priority: 0.2,

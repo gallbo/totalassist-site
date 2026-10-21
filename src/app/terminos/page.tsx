@@ -12,6 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Términos y condiciones",
   description: "Términos y condiciones de uso de Total Assist.",
+  alternates: { canonical: "/terminos" },
 };
 
 export default function TerminosPage() {

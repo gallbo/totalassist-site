@@ -7,6 +7,7 @@ import { AvisoPrivacidadContenido } from "@/components/aviso-privacidad-contenid
 export const metadata: Metadata = {
   title: "Aviso de privacidad",
   description: "Aviso de privacidad de Total Assist para agentes de seguros.",
+  alternates: { canonical: "/privacidad" },
 };
 
 export default function PrivacidadPage() {

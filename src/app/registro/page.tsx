@@ -358,12 +358,12 @@ export default function RegistroPage() {
                         <span>
                           {PRIVACIDAD_CONSENTIMIENTO.pre}
                           <a
-                            href="/avisodeprivacidadagentes"
+                            href="/aviso-de-privacidad-agentes"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-brand-navy font-semibold hover:underline"
                           >
-                            totalclaimassist.com/avisodeprivacidadagentes
+                            totalclaimassist.com/aviso-de-privacidad-agentes
                           </a>
                           {PRIVACIDAD_CONSENTIMIENTO.mid}
                           <a
@@ -407,7 +407,7 @@ export default function RegistroPage() {
                   <AvisoPrivacidadModal
                     open={privacidadOpen}
                     onAccept={aceptarPrivacidad}
-                    integralHref="/avisodeprivacidadagentes"
+                    integralHref="/aviso-de-privacidad-agentes"
                   />
 
                   <TerminosModal

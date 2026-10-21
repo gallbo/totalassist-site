@@ -33,7 +33,7 @@ export function Beneficios() {
             Por qué Total Assist
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Un equipo que ya hizo el camino — {siteConfig.yearsExperience}+ años de oficio
+            Un equipo que ya hizo el camino
           </h2>
         </div>
 

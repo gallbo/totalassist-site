@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Aviso de privacidad — Agentes de seguros",
   description:
     "Aviso de privacidad integral de Claim Assist México, S.C. para agentes de seguros.",
+  alternates: { canonical: "/aviso-de-privacidad-agentes" },
 };
 
 export default function AvisoPrivacidadAgentesPage() {
