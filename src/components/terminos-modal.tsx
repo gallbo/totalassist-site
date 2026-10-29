@@ -67,7 +67,9 @@ export function TerminosModal({
               onChange={(e) => setLeido(e.target.checked)}
               className="accent-brand-navy mt-0.5 h-5 w-5 shrink-0 cursor-pointer"
             />
-            <span>{TERMINOS_ACEPTO_CHECKBOX}</span>
+            <span className="text-brand-navy font-bold">
+              {TERMINOS_ACEPTO_CHECKBOX}
+            </span>
           </label>
 
           <div className="flex justify-end">

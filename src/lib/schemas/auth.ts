@@ -1,10 +1,17 @@
 import { z } from "zod";
 
+export const REQUISITOS_PASSWORD = [
+  { texto: "Mínimo 8 caracteres", cumple: (v: string) => v.length >= 8 },
+  { texto: "Al menos 1 letra mayúscula", cumple: (v: string) => /[A-Z]/.test(v) },
+  { texto: "Al menos 1 número", cumple: (v: string) => /\d/.test(v) },
+  { texto: "Al menos 1 símbolo", cumple: (v: string) => /[\W_]/.test(v) },
+];
+
 const passwordPolicy = z
   .string()
   .regex(
-    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{10,}$/,
-    "Tu contraseña debe tener al menos 10 caracteres, con mayúsculas, minúsculas, números y un símbolo.",
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+    "Tu contraseña debe tener al menos 8 caracteres, con una mayúscula, un número y un símbolo.",
   );
 
 const cedulaPolicy = z
@@ -34,8 +41,7 @@ export const registerSchema = z
     telefono: z
       .string()
       .trim()
-      .min(8, "Ingresa un teléfono válido")
-      .regex(/^[0-9+\-\s()]+$/, "Solo números y símbolos de teléfono"),
+      .regex(/^\d{10}$/, "Ingresa un teléfono de 10 dígitos"),
     cedula: cedulaPolicy,
     password: passwordPolicy,
     password_confirmation: z.string(),

@@ -5,11 +5,23 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { ArrowLeft, ArrowRight, CheckCircle2, Eye, EyeOff } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  Circle,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { Logo } from "@/components/layout/logo";
 import { ApiError, registrarBroker } from "@/lib/api/brokers";
-import { registerSchema, type RegisterInput } from "@/lib/schemas/auth";
+import {
+  REQUISITOS_PASSWORD,
+  registerSchema,
+  type RegisterInput,
+} from "@/lib/schemas/auth";
 import { siteConfig } from "@/lib/site-config";
 import { TERMINOS_VERSION } from "@/lib/terminos";
 import { TerminosModal } from "@/components/terminos-modal";
@@ -25,6 +37,20 @@ const ERROR_FIELD_MAP: Record<string, keyof RegisterInput> = {
   email_duplicado: "email",
   cedula_invalida: "cedula",
 };
+
+const CONSULTA_CEDULA_URL = "https://agentesajustadores.cnsf.gob.mx/Agentes";
+
+// Orden en que aparecen los campos; se usa para llevar la vista al primero con error.
+const ORDEN_CAMPOS: (keyof RegisterInput)[] = [
+  "nombre",
+  "apellido_paterno",
+  "apellido_materno",
+  "cedula",
+  "email",
+  "telefono",
+  "password",
+  "password_confirmation",
+];
 
 const BENEFICIOS = [
   "Respaldo profesional en cada reclamación",
@@ -46,6 +72,7 @@ export default function RegistroPage() {
     register,
     handleSubmit,
     setError,
+    watch,
     formState: { errors },
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
@@ -107,6 +134,24 @@ export default function RegistroPage() {
   const onValid = (values: RegisterInput) => {
     void confirmarRegistro(values);
   };
+
+  const onInvalid = (fallos: Partial<Record<keyof RegisterInput, unknown>>) => {
+    const primero = ORDEN_CAMPOS.find((campo) => fallos[campo]);
+    const input = primero ? document.getElementById(primero) : null;
+    if (!input) return;
+    input.scrollIntoView({ behavior: "smooth", block: "center" });
+    input.focus({ preventScroll: true });
+  };
+
+  const password = watch("password");
+  const confirmacion = watch("password_confirmation");
+  // Se avisa en cuanto la confirmación deja de coincidir, sin esperar al envío:
+  // mientras se escribe solo si ya se desvió, y al alcanzar el largo si no es igual.
+  const noCoinciden =
+    confirmacion.length > 0 &&
+    confirmacion !== password &&
+    (!password.startsWith(confirmacion) ||
+      confirmacion.length >= password.length);
 
   // En la secuencia inicial (al abrir la vista) aceptar los terminos encadena
   // el aviso. Si el usuario reabre los terminos desde su casilla, solo se
@@ -189,7 +234,7 @@ export default function RegistroPage() {
                   </p>
 
                   <form
-                    onSubmit={handleSubmit(onValid)}
+                    onSubmit={handleSubmit(onValid, onInvalid)}
                     className="mt-7 space-y-5"
                     noValidate
                   >
@@ -233,6 +278,7 @@ export default function RegistroPage() {
                         <input
                           id="apellido_materno"
                           type="text"
+                          autoComplete="additional-name"
                           disabled={submitting}
                           className={inputClass(!!errors.apellido_materno)}
                           {...register("apellido_materno")}
@@ -248,10 +294,22 @@ export default function RegistroPage() {
                           id="cedula"
                           type="text"
                           autoCapitalize="characters"
+                          placeholder="Ej. A123456"
                           disabled={submitting}
-                          className={inputClass(!!errors.cedula)}
+                          className={cn(
+                            inputClass(!!errors.cedula),
+                            "placeholder:text-neutral-400",
+                          )}
                           {...register("cedula")}
                         />
+                        <a
+                          href={CONSULTA_CEDULA_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-brand-navy self-start text-xs font-semibold hover:underline"
+                        >
+                          ¿No conoces tu cédula CNSF? Consúltala aquí
+                        </a>
                       </Field>
 
                       <Field
@@ -277,10 +335,15 @@ export default function RegistroPage() {
                         <input
                           id="telefono"
                           type="tel"
-                          autoComplete="tel"
+                          inputMode="numeric"
+                          autoComplete="tel-national"
                           disabled={submitting}
                           className={inputClass(!!errors.telefono)}
-                          {...register("telefono")}
+                          {...register("telefono", {
+                            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                              e.target.value = soloDiezDigitos(e.target.value);
+                            },
+                          })}
                         />
                       </Field>
 
@@ -288,7 +351,6 @@ export default function RegistroPage() {
                         label="Contraseña"
                         id="password"
                         error={errors.password?.message}
-                        hint="10+ caracteres con mayús, minús, número y símbolo."
                       >
                         <PasswordField
                           id="password"
@@ -297,18 +359,22 @@ export default function RegistroPage() {
                           invalid={!!errors.password}
                           {...register("password")}
                         />
+                        <RequisitosPassword valor={password} />
                       </Field>
 
                       <Field
                         label="Confirmar contraseña"
                         id="password_confirmation"
-                        error={errors.password_confirmation?.message}
+                        error={
+                          errors.password_confirmation?.message ??
+                          (noCoinciden ? "Las contraseñas no coinciden" : undefined)
+                        }
                       >
                         <PasswordField
                           id="password_confirmation"
                           autoComplete="new-password"
                           disabled={submitting}
-                          invalid={!!errors.password_confirmation}
+                          invalid={!!errors.password_confirmation || noCoinciden}
                           {...register("password_confirmation")}
                         />
                       </Field>
@@ -513,6 +579,46 @@ function inputClass(invalid: boolean) {
       : "focus:border-brand-navy focus:ring-brand-navy/20 border-neutral-200",
     "focus:bg-white focus:ring-2",
     "disabled:cursor-not-allowed disabled:opacity-60",
+  );
+}
+
+// Sin maxLength en el input: el navegador truncaría lo pegado o autocompletado
+// antes de limpiarlo. Si trae lada de país (+52 o +52 1) se quita; si no, se
+// conservan los primeros 10 dígitos y el resto no entra.
+function soloDiezDigitos(valor: string) {
+  const digitos = valor.replace(/\D/g, "");
+  const sinLada = digitos.replace(/^521?(?=\d{10}$)/, "");
+  return sinLada.slice(0, 10);
+}
+
+function RequisitosPassword({ valor }: { valor: string }) {
+  return (
+    <ul className="mt-1 space-y-1 text-xs" aria-live="polite">
+      {REQUISITOS_PASSWORD.map(({ texto, cumple }) => {
+        const ok = cumple(valor);
+        return (
+          <li
+            key={texto}
+            className={cn(
+              "flex items-center gap-1.5",
+              ok ? "text-state-success" : "text-neutral-500",
+            )}
+          >
+            {ok ? (
+              <Check className="h-3.5 w-3.5 shrink-0" strokeWidth={3} />
+            ) : (
+              <Circle className="h-3.5 w-3.5 shrink-0" />
+            )}
+            <span>
+              {texto}
+              <span className="sr-only">
+                {ok ? " (cumplido)" : " (pendiente)"}
+              </span>
+            </span>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
