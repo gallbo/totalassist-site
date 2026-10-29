@@ -1,11 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { faqs as defaultFaqs } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-type Item = { q: string; a: string; videoSrc?: string };
+type Item = {
+  q: string;
+  a: string;
+  videoSrc?: string;
+  cta?: { label: string; href: string };
+};
 
 type Props = {
   eyebrow?: string;
@@ -71,6 +77,17 @@ export function Faq({
                     ) : (
                       <p className="text-sm leading-relaxed text-neutral-600 sm:text-base">
                         {item.a}
+                        {item.cta && (
+                          <>
+                            {" "}
+                            <Link
+                              href={item.cta.href}
+                              className="text-brand-navy font-semibold underline underline-offset-2 hover:no-underline"
+                            >
+                              {item.cta.label}
+                            </Link>
+                          </>
+                        )}
                       </p>
                     )}
                   </div>

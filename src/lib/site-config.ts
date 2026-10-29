@@ -9,6 +9,11 @@ export const siteConfig = {
   yearsExperience: 27,
   freeUntil: "diciembre 2026",
   appUrl: process.env.NEXT_PUBLIC_TOTALASSIST_APP_URL || "https://totalclaimassist.app",
+  redesSociales: {
+    instagram: "https://www.instagram.com/totalassistmx/",
+    facebook: "https://www.facebook.com/profile.php?id=61588669220194&locale=es_LA",
+    youtube: "https://www.youtube.com/@Totalclaimassist",
+  },
 };
 
 export const beneficiosHero = [
@@ -88,6 +93,7 @@ export const faqs = [
   {
     q: "¿Cuánto cuesta el servicio?",
     a: "El servicio es gratuito hasta diciembre de 2026 para los agentes que se registren durante este periodo.",
+    cta: { label: "Crea tu cuenta.", href: "/registro" },
   },
   {
     q: "¿Qué tipo de siniestros atienden?",

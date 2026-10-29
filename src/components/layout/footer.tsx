@@ -1,6 +1,13 @@
 import Link from "next/link";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { siteConfig, servicios } from "@/lib/site-config";
+
+const REDES = [
+  { nombre: "Instagram", href: siteConfig.redesSociales.instagram, Icono: Instagram },
+  { nombre: "Facebook", href: siteConfig.redesSociales.facebook, Icono: Facebook },
+  { nombre: "YouTube", href: siteConfig.redesSociales.youtube, Icono: Youtube },
+];
 
 export function Footer() {
   return (
@@ -8,6 +15,21 @@ export function Footer() {
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
         <div className="md:col-span-1">
           <Logo variant="shield" className="h-12 w-auto brightness-0 invert" />
+          <ul className="mt-5 flex gap-3">
+            {REDES.map(({ nombre, href, Icono }) => (
+              <li key={nombre}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Total Assist en ${nombre}`}
+                  className="hover:border-brand-yellow hover:text-brand-yellow inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-neutral-300 transition-colors"
+                >
+                  <Icono className="h-5 w-5" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>

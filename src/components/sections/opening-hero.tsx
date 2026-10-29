@@ -36,12 +36,6 @@ export function OpeningHero() {
                 Regístrate gratis
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href="#servicio"
-                className="w-full rounded-pill border border-white/30 px-6 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto sm:px-7 sm:py-3.5"
-              >
-                Conoce el servicio
-              </a>
             </div>
           </div>
 
