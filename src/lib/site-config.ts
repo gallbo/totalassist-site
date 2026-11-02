@@ -126,7 +126,7 @@ export const sedes = [
     city: "Culiacán",
     label: "Corporativo",
     address:
-      "Blvd. Enrique Sánchez Alonso 2249, Int. 1, Parque Alameda, CP 80030",
+      "Blvd. Enrique Sánchez Alonso 2249, Int. 1, Parque Alamedas, CP 80030",
   },
   {
     city: "Ciudad de México",
