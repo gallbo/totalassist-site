@@ -38,8 +38,6 @@ const ERROR_FIELD_MAP: Record<string, keyof RegisterInput> = {
   cedula_invalida: "cedula",
 };
 
-const CONSULTA_CEDULA_URL = "https://agentesajustadores.cnsf.gob.mx/Agentes";
-
 // Orden en que aparecen los campos; se usa para llevar la vista al primero con error.
 const ORDEN_CAMPOS: (keyof RegisterInput)[] = [
   "nombre",
@@ -302,14 +300,6 @@ export default function RegistroPage() {
                           )}
                           {...register("cedula")}
                         />
-                        <a
-                          href={CONSULTA_CEDULA_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-brand-navy self-start text-xs font-semibold hover:underline"
-                        >
-                          ¿No conoces tu cédula CNSF? Consúltala aquí
-                        </a>
                       </Field>
 
                       <Field
@@ -352,14 +342,16 @@ export default function RegistroPage() {
                         id="password"
                         error={errors.password?.message}
                       >
-                        <PasswordField
-                          id="password"
-                          autoComplete="new-password"
-                          disabled={submitting}
-                          invalid={!!errors.password}
-                          {...register("password")}
-                        />
-                        <RequisitosPassword valor={password} />
+                        <div className="group flex flex-col gap-1.5">
+                          <PasswordField
+                            id="password"
+                            autoComplete="new-password"
+                            disabled={submitting}
+                            invalid={!!errors.password}
+                            {...register("password")}
+                          />
+                          <RequisitosPassword valor={password} />
+                        </div>
                       </Field>
 
                       <Field
@@ -593,7 +585,10 @@ function soloDiezDigitos(valor: string) {
 
 function RequisitosPassword({ valor }: { valor: string }) {
   return (
-    <ul className="mt-1 space-y-1 text-xs" aria-live="polite">
+    <ul
+      className="mt-1 hidden space-y-1 text-xs group-focus-within:block"
+      aria-live="polite"
+    >
       {REQUISITOS_PASSWORD.map(({ texto, cumple }) => {
         const ok = cumple(valor);
         return (
