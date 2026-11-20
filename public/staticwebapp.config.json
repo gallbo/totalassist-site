@@ -2,13 +2,18 @@
   "trailingSlash": "never",
   "routes": [
     {
+      "route": "/agentes-de-seguros",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
       "route": "/inicio",
-      "redirect": "/agentes-de-seguros",
+      "redirect": "/",
       "statusCode": 301
     },
     {
       "route": "/inicio.html",
-      "redirect": "/agentes-de-seguros",
+      "redirect": "/",
       "statusCode": 301
     },
     {
