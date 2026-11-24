@@ -21,6 +21,7 @@ const NAV_LINKS: Record<Variant, { label: string; href: string }[]> = {
     { label: "Servicio", href: "#servicio" },
     { label: "Beneficios", href: "#beneficios" },
     { label: "Proceso", href: "#proceso" },
+    { label: "Qué incluye", href: "#servicios" },
     { label: "Preguntas", href: "#faq" },
     { label: "Contacto", href: "#contacto" },
   ],

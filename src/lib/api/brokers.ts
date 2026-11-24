@@ -8,7 +8,6 @@ export type RegistrarBrokerInput = {
   email: string;
   telefono: string;
   cedula: string;
-  password: string;
   acepta_terminos: boolean;
   terminos_version: string;
   acepta_privacidad: boolean;

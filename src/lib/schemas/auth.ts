@@ -1,19 +1,5 @@
 import { z } from "zod";
 
-export const REQUISITOS_PASSWORD = [
-  { texto: "Mínimo 8 caracteres", cumple: (v: string) => v.length >= 8 },
-  { texto: "Al menos 1 letra mayúscula", cumple: (v: string) => /[A-Z]/.test(v) },
-  { texto: "Al menos 1 número", cumple: (v: string) => /\d/.test(v) },
-  { texto: "Al menos 1 símbolo", cumple: (v: string) => /[\W_]/.test(v) },
-];
-
-const passwordPolicy = z
-  .string()
-  .regex(
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
-    "Tu contraseña debe tener al menos 8 caracteres, con una mayúscula, un número y un símbolo.",
-  );
-
 const cedulaPolicy = z
   .string()
   .trim()
@@ -43,12 +29,8 @@ export const registerSchema = z
       .trim()
       .regex(/^\d{10}$/, "Ingresa un teléfono de 10 dígitos"),
     cedula: cedulaPolicy,
-    password: passwordPolicy,
-    password_confirmation: z.string(),
-  })
-  .refine((data) => data.password === data.password_confirmation, {
-    message: "Las contraseñas no coinciden",
-    path: ["password_confirmation"],
   });
+// Registro en dos pasos (Skipper, migración 144): la contraseña, el domicilio
+// y el RFC se capturan en la liga de activación del correo de bienvenida.
 
 export type RegisterInput = z.infer<typeof registerSchema>;

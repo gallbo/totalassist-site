@@ -85,6 +85,45 @@ export const proceso = [
   },
 ];
 
+// Servicios de la plataforma (landing de agentes, nov-2026). Varios agentes
+// registraban como caso lo que en realidad era una consulta: aquí se explica
+// qué es cada sección de su cuenta y cuándo usarla.
+export const landingServicios = [
+  {
+    id: "casos",
+    seccion: "Casos",
+    title: "Gestión de siniestros",
+    cuando: "Tu asegurado ya tuvo un siniestro y hay que reclamarlo a la aseguradora.",
+    body: "Registras el caso en unos minutos y nuestro equipo integra el expediente, da seguimiento con la aseguradora y acompaña a tu cliente hasta la resolución.",
+  },
+  {
+    id: "consultas",
+    seccion: "Consultas",
+    title: "Consultas técnico-jurídicas",
+    cuando: "Tienes una duda sobre una póliza, una cobertura o el criterio de una aseguradora, pero no hay un reclamo que tramitar.",
+    body: "Escribe tu pregunta y nuestro equipo técnico y jurídico te responde directamente dentro de la plataforma, sin abrir un expediente de siniestro.",
+  },
+  {
+    id: "conferencias",
+    seccion: "Conferencias",
+    title: "Conferencias y capacitaciones",
+    cuando: "Quieres actualizarte y fortalecer tu práctica profesional.",
+    body: "Conferencias, cursos y talleres para agentes de seguros. Consulta el calendario y entra a cada evento desde tu cuenta.",
+  },
+  {
+    id: "defensa-legal",
+    seccion: "Defensa Legal",
+    title: "Defensa legal del agente",
+    cuando: "Quieres respaldo legal para ejercer tu actividad con mayor seguridad.",
+    body: "Respaldo ante reclamos de tus asegurados, faltas administrativas ante la CNSF y consultoría jurídica general para tu actividad.",
+  },
+];
+
+export const landingCasoOConsulta = {
+  title: "¿Caso o consulta?",
+  body: "Un caso pone en marcha la gestión completa del siniestro: abrimos el expediente y empezamos a trabajar con tu asegurado y la aseguradora. Si solo tienes una duda técnica o jurídica, no registres un caso: haz una consulta y te responde directamente el equipo indicado, más rápido.",
+};
+
 export const faqs = [
   {
     q: "¿Total Assist sustituye al agente?",
@@ -106,6 +145,10 @@ export const faqs = [
   {
     q: "¿En qué momento intervienen?",
     a: "Desde el primer aviso del siniestro hasta la resolución final del expediente.",
+  },
+  {
+    q: "¿Cuál es la diferencia entre registrar un caso y hacer una consulta?",
+    a: "Un caso es un siniestro de tu asegurado que nosotros gestionamos ante la aseguradora hasta su resolución. Una consulta es una pregunta técnica o jurídica (sobre una póliza, una cobertura o el criterio de una aseguradora) que nuestro equipo técnico y jurídico te responde por escrito dentro de la plataforma. Si solo tienes una duda, usa Consultas: registrarla como caso abre un expediente de siniestro y tarda más en llegar al equipo que puede responderte.",
   },
   {
     q: "¿Cómo crear mi cuenta?",

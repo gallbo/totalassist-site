@@ -8,20 +8,13 @@ import { toast } from "sonner";
 import {
   ArrowLeft,
   ArrowRight,
-  Check,
   CheckCircle2,
-  Circle,
-  Eye,
-  EyeOff,
+  MailCheck,
 } from "lucide-react";
 import { BackgroundPattern } from "@/components/layout/background-pattern";
 import { Logo } from "@/components/layout/logo";
 import { ApiError, registrarBroker } from "@/lib/api/brokers";
-import {
-  REQUISITOS_PASSWORD,
-  registerSchema,
-  type RegisterInput,
-} from "@/lib/schemas/auth";
+import { registerSchema, type RegisterInput } from "@/lib/schemas/auth";
 import { siteConfig } from "@/lib/site-config";
 import { TERMINOS_VERSION } from "@/lib/terminos";
 import {
@@ -45,20 +38,18 @@ const ORDEN_CAMPOS: (keyof RegisterInput)[] = [
   "cedula",
   "email",
   "telefono",
-  "password",
-  "password_confirmation",
 ];
 
 const BENEFICIOS = [
   "Respaldo profesional en cada reclamación",
   `Sin costo hasta ${siteConfig.freeUntil}`,
   "Equipo con +27 años atendiendo siniestros",
-  "Activación inmediata después del registro",
+  "Registro en dos minutos y activación por correo",
 ];
 
 export default function RegistroPage() {
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
   const [terminosAceptados, setTerminosAceptados] = useState(false);
   const [privacidadAceptada, setPrivacidadAceptada] = useState(false);
 
@@ -80,8 +71,6 @@ export default function RegistroPage() {
       email: "",
       telefono: "",
       cedula: "",
-      password: "",
-      password_confirmation: "",
     },
   });
 
@@ -95,16 +84,14 @@ export default function RegistroPage() {
         email: values.email,
         telefono: values.telefono,
         cedula: values.cedula,
-        password: values.password,
         acepta_terminos: true,
         terminos_version: TERMINOS_VERSION,
         acepta_privacidad: true,
         privacidad_version: PRIVACIDAD_VERSION,
       });
 
-      setSuccess(true);
+      setSuccess(values.email);
       registrarEvento("registro_completo");
-      toast.success("Cuenta creada. Te enviamos un correo de bienvenida.");
     } catch (error) {
       if (error instanceof ApiError) {
         if (error.code && ERROR_FIELD_MAP[error.code]) {
@@ -142,15 +129,6 @@ export default function RegistroPage() {
 
   const valores = useWatch({ control });
   const formularioCompleto = registerSchema.safeParse(valores).success;
-  const password = valores.password ?? "";
-  const confirmacion = valores.password_confirmation ?? "";
-  // Se avisa en cuanto la confirmación deja de coincidir, sin esperar al envío:
-  // mientras se escribe solo si ya se desvió, y al alcanzar el largo si no es igual.
-  const noCoinciden =
-    confirmacion.length > 0 &&
-    confirmacion !== password &&
-    (!password.startsWith(confirmacion) ||
-      confirmacion.length >= password.length);
 
   return (
     <div className="bg-brand-navy relative min-h-svh overflow-hidden text-white">
@@ -204,15 +182,15 @@ export default function RegistroPage() {
           <section className="lg:col-span-7">
             <div className="rounded-3xl bg-white p-6 text-neutral-900 shadow-2xl sm:p-8 lg:p-10">
               {success ? (
-                <SuccessState />
+                <SuccessState email={success} />
               ) : (
                 <>
                   <h2 className="text-brand-navy text-2xl font-bold sm:text-3xl">
                     Crea tu cuenta
                   </h2>
                   <p className="mt-2 text-sm text-neutral-500">
-                    Te enviaremos un correo de bienvenida con el enlace para
-                    iniciar sesión.
+                    Déjanos tus datos y te enviaremos un correo para activar tu
+                    cuenta y crear tu contraseña.
                   </p>
 
                   <form
@@ -302,7 +280,7 @@ export default function RegistroPage() {
                       </Field>
 
                       <Field
-                        label="Teléfono"
+                        label="Teléfono celular"
                         id="telefono"
                         error={errors.telefono?.message}
                       >
@@ -318,40 +296,6 @@ export default function RegistroPage() {
                               e.target.value = soloDiezDigitos(e.target.value);
                             },
                           })}
-                        />
-                      </Field>
-
-                      <Field
-                        label="Contraseña"
-                        id="password"
-                        error={errors.password?.message}
-                      >
-                        <div className="group flex flex-col gap-1.5">
-                          <PasswordField
-                            id="password"
-                            autoComplete="new-password"
-                            disabled={submitting}
-                            invalid={!!errors.password}
-                            {...register("password")}
-                          />
-                          <RequisitosPassword valor={password} />
-                        </div>
-                      </Field>
-
-                      <Field
-                        label="Confirmar contraseña"
-                        id="password_confirmation"
-                        error={
-                          errors.password_confirmation?.message ??
-                          (noCoinciden ? "Las contraseñas no coinciden" : undefined)
-                        }
-                      >
-                        <PasswordField
-                          id="password_confirmation"
-                          autoComplete="new-password"
-                          disabled={submitting}
-                          invalid={!!errors.password_confirmation || noCoinciden}
-                          {...register("password_confirmation")}
                         />
                       </Field>
                     </div>
@@ -456,28 +400,33 @@ export default function RegistroPage() {
   );
 }
 
-function SuccessState() {
+function SuccessState({ email }: { email: string }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="bg-brand-yellow/20 text-brand-yellow flex h-16 w-16 items-center justify-center rounded-full">
-        <CheckCircle2 className="h-9 w-9" />
+      <div className="bg-brand-yellow/20 text-brand-navy flex h-16 w-16 items-center justify-center rounded-full">
+        <MailCheck className="h-8 w-8" />
       </div>
       <h2 className="text-brand-navy mt-5 text-2xl font-bold sm:text-3xl">
-        ¡Tu cuenta está lista!
+        Revisa tu correo
       </h2>
       <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-600">
-        Te enviamos un correo de bienvenida con los siguientes pasos. Para
-        empezar a usar Total Assist inicia sesión en el portal con el correo y
-        la contraseña que registraste.
+        Te enviamos un correo de bienvenida a{" "}
+        <strong className="text-brand-navy">{email}</strong> con una liga para
+        activar tu cuenta. Ahí vas a crear tu contraseña y completar tu perfil
+        con tu domicilio y RFC.
+      </p>
+      <p className="mt-2 max-w-md text-xs text-neutral-500">
+        La liga vence en 7 días. Si no lo ves, revisa tu carpeta de correo no
+        deseado o pide una nueva liga.
       </p>
 
       <a
-        href={`${siteConfig.appUrl}/login`}
+        href={`${siteConfig.appUrl}/activar`}
         target="_blank"
         rel="noopener noreferrer"
         className="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-navy rounded-pill mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold transition-colors"
       >
-        Iniciar sesión
+        No me llegó el correo
         <ArrowRight className="h-4 w-4" />
       </a>
 
@@ -543,67 +492,6 @@ function soloDiezDigitos(valor: string) {
   const digitos = valor.replace(/\D/g, "");
   const sinLada = digitos.replace(/^521?(?=\d{10}$)/, "");
   return sinLada.slice(0, 10);
-}
-
-function RequisitosPassword({ valor }: { valor: string }) {
-  return (
-    <ul
-      className="mt-1 hidden space-y-1 text-xs group-focus-within:block"
-      aria-live="polite"
-    >
-      {REQUISITOS_PASSWORD.map(({ texto, cumple }) => {
-        const ok = cumple(valor);
-        return (
-          <li
-            key={texto}
-            className={cn(
-              "flex items-center gap-1.5",
-              ok ? "text-state-success" : "text-neutral-500",
-            )}
-          >
-            {ok ? (
-              <Check className="h-3.5 w-3.5 shrink-0" strokeWidth={3} />
-            ) : (
-              <Circle className="h-3.5 w-3.5 shrink-0" />
-            )}
-            <span>
-              {texto}
-              <span className="sr-only">
-                {ok ? " (cumplido)" : " (pendiente)"}
-              </span>
-            </span>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
-function PasswordField({
-  id,
-  invalid,
-  ...rest
-}: React.InputHTMLAttributes<HTMLInputElement> & { invalid: boolean }) {
-  const [shown, setShown] = useState(false);
-  return (
-    <div className="relative">
-      <input
-        id={id}
-        type={shown ? "text" : "password"}
-        className={cn(inputClass(invalid), "pr-11")}
-        {...rest}
-      />
-      <button
-        type="button"
-        aria-label={shown ? "Ocultar contraseña" : "Mostrar contraseña"}
-        onClick={() => setShown((v) => !v)}
-        className="hover:text-brand-navy absolute top-1/2 right-3 -translate-y-1/2 text-neutral-400 transition-colors"
-        tabIndex={-1}
-      >
-        {shown ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-      </button>
-    </div>
-  );
 }
 
 function Spinner() {

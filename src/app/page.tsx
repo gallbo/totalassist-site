@@ -9,6 +9,7 @@ import { Riesgos } from "@/components/sections/riesgos";
 import { Beneficios } from "@/components/sections/beneficios";
 import { Proceso } from "@/components/sections/proceso";
 import { Faq } from "@/components/sections/faq";
+import { ServiciosPlataforma } from "@/components/sections/servicios-plataforma";
 import { Sedes } from "@/components/sections/sedes";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { Contacto } from "@/components/sections/contacto";
@@ -74,6 +75,7 @@ export default function Inicio() {
         <Riesgos />
         <Beneficios />
         <Proceso />
+        <ServiciosPlataforma />
         <Faq />
         <CtaBanner />
         <Sedes />
