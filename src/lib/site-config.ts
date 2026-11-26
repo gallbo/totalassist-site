@@ -13,6 +13,7 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/totalassistmx/",
     facebook: "https://www.facebook.com/profile.php?id=61588669220194&locale=es_LA",
     youtube: "https://www.youtube.com/@Totalclaimassist",
+    linkedin: "https://www.linkedin.com/company/total-assist/",
   },
 };
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { siteConfig, servicios } from "@/lib/site-config";
 
@@ -7,6 +7,7 @@ const REDES = [
   { nombre: "Instagram", href: siteConfig.redesSociales.instagram, Icono: Instagram },
   { nombre: "Facebook", href: siteConfig.redesSociales.facebook, Icono: Facebook },
   { nombre: "YouTube", href: siteConfig.redesSociales.youtube, Icono: Youtube },
+  { nombre: "LinkedIn", href: siteConfig.redesSociales.linkedin, Icono: Linkedin },
 ];
 
 export function Footer() {
